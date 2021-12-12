@@ -43,7 +43,7 @@ public class MenuState extends GameState{
     g.drawImage(background, 0, 0, background.getWidth(), background.getHeight(), null);
     
     Content.drawString(g, options[0], 48, 100);
-	Content.drawString(g, options[1], 48, 110);
+    Content.drawString(g, options[1], 48, 110);
     
     if (currentOption == 0) g.drawImage(book, 25, 96, null);
     else if (currentOption == 1) g.drawImage(book, 25, 106, null);
