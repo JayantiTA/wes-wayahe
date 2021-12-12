@@ -48,8 +48,8 @@ public abstract class Entity {
     animation = new Animation();
   }
   
-  public int getx() { return x; }
-  public int gety() { return y; }
+  public int getX() { return x; }
+  public int getY() { return y; }
   public int getRow() { return rowTile; }
   public int getCol() { return colTile; }
   
