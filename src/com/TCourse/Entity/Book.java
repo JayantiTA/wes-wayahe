@@ -14,6 +14,7 @@ public class Book extends Entity {
   private ArrayList<int[]> tileChanges;
   
   public Book(TileMap tm) {
+    
     super(tm);
     width = height = 16;
     cWidth = cHeight = 12;
