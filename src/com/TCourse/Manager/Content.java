@@ -7,15 +7,15 @@ import javax.imageio.ImageIO;
 
 public class Content {
 
-  public static BufferedImage[][] MENUBG;
-  public static BufferedImage[][] BAR;
+  public static BufferedImage[][] MENUBG = load("/Content/menuscreen.gif", 128, 144);
+  public static BufferedImage[][] BAR = load("/HUD/bar.gif", 128, 16);
   
-  public static BufferedImage[][] PLAYER;
-  public static BufferedImage[][] DIAMOND;
-  public static BufferedImage[][] SPARKLE;
-  public static BufferedImage[][] ITEMS;
+  public static BufferedImage[][] PLAYER = load("/Sprites/playersprites.gif", 16, 16);;
+  public static BufferedImage[][] BOOK = load("/Sprites/book1.gif", 16, 16);
+  public static BufferedImage[][] SPARKLE = load("/Sprites/sparkle.gif", 16, 16);
+  public static BufferedImage[][] ITEMS = load("/Sprites/items.gif", 16, 16);
   
-  public static BufferedImage[][] font;
+  public static BufferedImage[][] font = load("/HUD/font.gif", 8, 8);;
   
   public static BufferedImage[][] load(String s, int w, int h) {
     BufferedImage[][] ret;
