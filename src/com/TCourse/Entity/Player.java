@@ -78,9 +78,9 @@ public class Player extends Entity {
   public int getTotalDiamonds() { return totalDiamonds; }
   public void setTotalDiamonds(int i) { totalDiamonds = i; }
   
-  public void collectedCourse(Courses.ListCourses c) { 
-    if (c == Courses.ListCourses.PROBSTAT) {
-      if (!Courses.ListCourses.MATDIS.finishCourse()) {
+  public void collectedCourse(Course.ListCourses c) { 
+    if (c == Course.ListCourses.PROBSTAT) {
+      if (!Course.ListCourses.MATDIS.finishCourse()) {
         return;
       }
     }
@@ -91,7 +91,7 @@ public class Player extends Entity {
   public int numCourses() { return numCourses; }
   public int getTotalCourses() { return totalCourses; }
   public int getTotalSks() { return totalSks; }
-  public void gotCourse(Courses.ListCourses c) { 
+  public void gotCourse(Course.ListCourses c) { 
     c.setCourse(true);
     tileMap.replace(22, 4);
   }

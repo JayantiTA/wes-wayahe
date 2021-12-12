@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import com.TCourse.Manager.Content;
 import com.TCourse.TileMap.TileMap;
 
-public class Courses extends Entity {
+public class Course extends Entity {
 
   BufferedImage sprite;
   
@@ -35,7 +35,7 @@ public class Courses extends Entity {
     }
   }
   
-  public Courses(TileMap tm) {
+  public Course(TileMap tm) {
     super(tm);
     course = ListCourses.INIT;
     width = height = 16;
