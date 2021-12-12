@@ -28,7 +28,7 @@ public class IntroState extends GameState {
   public void init() {
     ticks = 0;
     try {
-      logo = ImageIO.read(getClass().getResourceAsStream("/Logo/java_logo.jpg"));
+      logo = ImageIO.read(getClass().getResourceAsStream("/Logo/logo.gif"));
     }
     catch (Exception e) {
       e.printStackTrace();
