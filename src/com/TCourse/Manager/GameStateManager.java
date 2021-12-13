@@ -6,6 +6,7 @@ import com.TCourse.GameState.GameState;
 import com.TCourse.GameState.IntroState;
 import com.TCourse.GameState.MenuState;
 import com.TCourse.GameState.PauseState;
+import com.TCourse.GameState.PlayState;
 
 public class GameStateManager {
 
@@ -45,7 +46,7 @@ public class GameStateManager {
       gameStates[i].init();
     }
     else if(i == PLAY) {
-        gameStates[i] = new MenuState(this);
+        gameStates[i] = new PlayState(this);
         gameStates[i].init();
       }
   }
