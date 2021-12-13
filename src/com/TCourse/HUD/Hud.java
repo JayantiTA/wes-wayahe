@@ -46,13 +46,12 @@ public class Hud {
     g.drawImage(bar, 0, yOffset, null);
 
     g.setColor(textColor);
-    g.fillRect(8, yOffset + 6, (int)(28.0 * player.getTotalSks() / creditUnit), 4);
+    g.fillRect(8, yOffset + 6, (int)(28.0 * player.currentCredit() / creditUnit), 4);
 
     g.setColor(textColor);
     g.setFont(font);
-    String s = player.getTotalSks() + "/" + creditUnit;
+    String s = player.currentCredit() + "/" + creditUnit;
     Content.drawString(g, s, 40, yOffset + 3);
-    g.drawImage(book, 72, yOffset, null);
 
     if (player.hasBoat()) g.drawImage(boat, 100, yOffset, null);
     if (player.hasAxe()) g.drawImage(axe, 112, yOffset, null);

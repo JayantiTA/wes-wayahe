@@ -32,8 +32,9 @@ public class Player extends Entity {
   private int numDiamonds;
   private int totalDiamonds;
   private int numCourses;
+  private int tempCredit;
   private int totalCourses;
-  private int totalSks;
+  private int totalCredit;
   private boolean hasBoat;
   private boolean hasAxe;
   private boolean onWater;
@@ -78,23 +79,14 @@ public class Player extends Entity {
   public int getTotalDiamonds() { return totalDiamonds; }
   public void setTotalDiamonds(int i) { totalDiamonds = i; }
   
-  public void collectedCourse(Course.ListCourses c) { 
-    if (c == Course.ListCourses.PROBSTAT) {
-      if (!Course.ListCourses.MATDIS.finishCourse()) {
-        return;
-      }
-    }
-    
-    numCourses++;
-    totalSks += c.getSks();
-  }
+  public void collectedCourse(int i) { numCourses++; tempCredit += i;}
+  public void addCredit() {}
   public int numCourses() { return numCourses; }
+  public int currentCredit() { return tempCredit; }
   public int getTotalCourses() { return totalCourses; }
-  public int getTotalSks() { return totalSks; }
-  public void gotCourse(Course.ListCourses c) { 
-    c.setCourse(true);
-    tileMap.replace(22, 4);
-  }
+  public int getTotalCredit() { return totalCredit; }
+  public void setTotalCourses(int i) { totalCourses = i; }
+  public void setTotalCredit(int i) { totalCredit = i; }
   
   public void gotBoat() { hasBoat = true; tileMap.replace(22, 4); }
   public void gotAxe() { hasAxe = true; }
