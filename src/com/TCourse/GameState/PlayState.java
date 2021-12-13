@@ -11,6 +11,7 @@ import com.TCourse.Entity.Player;
 import com.TCourse.Entity.Sparkle;
 import com.TCourse.HUD.Hud;
 import com.TCourse.Main.GamePanel;
+import com.TCourse.Manager.Content;
 import com.TCourse.Manager.DataTime;
 import com.TCourse.Manager.GameStateManager;
 import com.TCourse.Manager.Keys;
@@ -24,11 +25,12 @@ public class PlayState extends GameState {
   
   private ArrayList<Book> books;
 
-  private ArrayList<Course> courses;
-  
   private ArrayList<Item> items;
   
   private ArrayList<Sparkle> sparkles;
+
+  private ArrayList<String> courseTaken;
+
   
   private int xSector;
   private int ySector;
@@ -50,9 +52,10 @@ public class PlayState extends GameState {
   public void init() {
     
     books = new ArrayList<Book>();
-    courses = new ArrayList<Course>();
     sparkles = new ArrayList<Sparkle>();
     items = new ArrayList<Item>();
+
+    courseTaken = new ArrayList<String>();
     
     tileMap = new TileMap(16);
     tileMap.loadTiles("/Tilesets/tilesets.gif");
@@ -186,6 +189,8 @@ public class PlayState extends GameState {
       
       if (player.intersects(b)) {
         
+        courseTaken.add(b.getCourseName());
+        hud.alreadyTaken(b.getCourseName());
         books.remove(i);
         i--;
         

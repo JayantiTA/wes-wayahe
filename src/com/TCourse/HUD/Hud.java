@@ -21,6 +21,8 @@ public class Hud {
   private Player player;
 
   private int creditUnit;
+  private int countTicks;
+  private String courseName;
 
   private Font font;
   private Color textColor;
@@ -39,6 +41,11 @@ public class Hud {
     font = new Font("Arial", Font.PLAIN, 10);
     textColor = new Color(47, 64, 126);
 
+  }
+
+  public void alreadyTaken(String s) {
+    countTicks = 0;
+    courseName = s;
   }
 
   public void draw(Graphics2D g) {
@@ -66,6 +73,9 @@ public class Hud {
       if (seconds < 10) Content.drawString(g, minutes + ":0" + seconds, 85, 3);
       else Content.drawString(g, minutes + ":" + seconds, 85, 3);
     }
+
+    countTicks++;
+    if (countTicks <= 10 && player.numCourses() > 0)  Content.drawString(g, courseName, 16, 16);
 
   }
 
