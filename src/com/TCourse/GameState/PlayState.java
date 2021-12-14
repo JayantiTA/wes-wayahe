@@ -28,9 +28,6 @@ public class PlayState extends GameState {
   private ArrayList<Item> items;
   
   private ArrayList<Sparkle> sparkles;
-
-  private ArrayList<String> courseTaken;
-
   
   private int xSector;
   private int ySector;
@@ -42,6 +39,9 @@ public class PlayState extends GameState {
   private boolean eventStart;
   private boolean eventFinish;
   private int eventTick;
+  private int currentPage;
+  private int countPage;
+  private int tempCount;
   
   private ArrayList<Rectangle> boxes;
   
@@ -54,8 +54,6 @@ public class PlayState extends GameState {
     books = new ArrayList<Book>();
     sparkles = new ArrayList<Sparkle>();
     items = new ArrayList<Item>();
-
-    courseTaken = new ArrayList<String>();
     
     tileMap = new TileMap(16);
     tileMap.loadTiles("/Tilesets/tilesets.gif");
@@ -75,6 +73,9 @@ public class PlayState extends GameState {
     tileMap.setPositionImmediately(-xSector * sectorSize, -ySector * sectorSize);
     
     hud = new Hud(player, 37);
+
+    currentPage = -1;
+    countPage = -1;
     
     boxes = new ArrayList<Rectangle>();
     eventStart = true;
@@ -92,28 +93,28 @@ public class PlayState extends GameState {
 		b.addChange(new int[] { 23, 20, 1 });
 		books.add(b);
     b = new Book(tileMap, "MAT 1");
-    b.setTilePosition(12,36);
+    b.setTilePosition(20,21);
 		b.addChange(new int[] { 31, 17, 1 });
 		books.add(b);
     b = new Book(tileMap, "FIS 1");
-    b.setTilePosition(28, 4);
+    b.setTilePosition(20, 22);
     b.addChange(new int[] {27, 7, 1});
 		b.addChange(new int[] {28, 7, 1});
 		books.add(b);
     b = new Book(tileMap, "KIM");
-    b.setTilePosition(4, 34);
+    b.setTilePosition(20, 19);
     b.addChange(new int[] { 31, 21, 1 });
 		books.add(b);
 
 
     b = new Book(tileMap, "BIN");
-    b.setTilePosition(28, 19);
+    b.setTilePosition(20, 18);
 		books.add(b);
     b = new Book(tileMap, "PANCASILA");
-    b.setTilePosition(35, 26);
+    b.setTilePosition(21, 20);
 		books.add(b);
     b = new Book(tileMap, "MAT 2");
-    b.setTilePosition(38, 36);
+    b.setTilePosition(21, 21);
 		books.add(b);
     b = new Book(tileMap, "FIS 2");
     b.setTilePosition(27, 28);
@@ -188,9 +189,21 @@ public class PlayState extends GameState {
       boolean hasFound = false;
       
       if (player.intersects(b)) {
+
+        if (player.courseInSemester2(b.getCourseName()) && !player.passedSemester1()) {
+          hud.alreadyTaken(b.getCourseName(), false);
+          hud.hasNotFinished(1);
+          return;
+        }
+
+        if (player.courseInSemester3(b.getCourseName()) && !player.passedSemester2()) {
+          hud.alreadyTaken(b.getCourseName(), false);
+          hud.hasNotFinished(2);
+          return;
+        }
         
-        courseTaken.add(b.getCourseName());
-        hud.alreadyTaken(b.getCourseName());
+        player.takeCourse(b.getCourseName());
+        hud.alreadyTaken(b.getCourseName(), true);
         books.remove(i);
         i--;
         
@@ -219,6 +232,7 @@ public class PlayState extends GameState {
         }
         
       }
+
     }
     
     for (int i = 0; i < sparkles.size(); i++) {
@@ -264,16 +278,91 @@ public class PlayState extends GameState {
     
     hud.draw(g);
     
+    if (currentPage == 0 && player.getCourseTaken().size() > 0) {
+      int positionX = 16;
+      int positionY = 16;
+      for (int i = 0;  i < 6; i++) {
+        Content.drawString(g, player.getCourseTaken().get(i), positionX, positionY);
+        positionY += 20;
+        if (i == player.getCourseTaken().size() - 1 && player.getCourseTaken().size() < 6) break;
+      }
+    }
+    if (currentPage == 1 && player.getCourseTaken().size() > 6) {
+      int positionX = 16;
+      int positionY = 16;
+      for (int i = 6;  i < 12; i++) {
+        Content.drawString(g, player.getCourseTaken().get(i), positionX, positionY);
+        positionY += 20;
+        if (i == player.getCourseTaken().size() - 1 && player.getCourseTaken().size() < 12) break;
+      }
+    }
+    if (currentPage == 2 && player.getCourseTaken().size() > 12) {
+      int positionX = 16;
+      int positionY = 16;
+      for (int i = 12;  i < 18; i++) {
+        Content.drawString(g, player.getCourseTaken().get(i), positionX, positionY);
+        positionY += 20;
+        if (i == player.getCourseTaken().size() - 1 && player.getCourseTaken().size() < 18) break;
+      }
+    }
+    if (currentPage == 3 && player.getCourseTaken().size() > 18) {
+      int positionX = 16;
+      int positionY = 16;
+      for (int i = 18;  i < 24; i++) {
+        Content.drawString(g, player.getCourseTaken().get(i), positionX, positionY);
+        positionY += 20;
+        if (i == player.getCourseTaken().size() - 1 && player.getCourseTaken().size() < 24) break;
+      }
+    }
+
     g.setColor(java.awt.Color.BLACK);
     for (int i = 0; i < boxes.size(); i++) {
       g.fill(boxes.get(i));
     }
+
     
   }
   
   public void handleInput() {
     if (Keys.isPressed(Keys.ESCAPE)) {
       gsm.setPaused(true);
+    }
+    if (Keys.isPressed(Keys.F2)) {
+      countPage = tempCount;
+      if (countPage == 3 && player.getCourseTaken().size() > 18) {
+        currentPage = 3;
+        countPage++;
+        tempCount = -1;
+      }
+      else if (countPage == 2 && player.getCourseTaken().size() > 12) {
+        currentPage = 2;
+        countPage++;
+        tempCount = countPage;
+        if (player.getCourseTaken().size() <= 18) tempCount = -1;
+      }
+      else if (countPage == 1 && player.getCourseTaken().size() > 6) {
+        currentPage = 1;
+        countPage++;
+        tempCount = countPage;
+        if (player.getCourseTaken().size() <= 12) tempCount = -1;
+      }
+      else if (countPage == 0) {
+        currentPage = 0;
+        countPage++;
+        tempCount = countPage;
+        if (player.getCourseTaken().size() <= 6) tempCount = -1;
+      } 
+      else {
+        currentPage = -1;
+        countPage = -1;
+        tempCount = 0;
+      }
+
+      tempCount = countPage;
+
+      System.out.println("temp count " + tempCount);
+      System.out.println("current page " + currentPage);
+      System.out.println("countpage " + countPage);
     }
     if (blockInput) return;
     if (Keys.isDown(Keys.LEFT)) player.setLeft();

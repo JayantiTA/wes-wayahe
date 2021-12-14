@@ -2,6 +2,7 @@ package com.TCourse.Entity;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import com.TCourse.Manager.Content;
 import com.TCourse.TileMap.TileMap;
@@ -27,14 +28,21 @@ public class Player extends Entity {
   private final int LEFTBOAT = 5;
   private final int RIGHTBOAT = 6;
   private final int UPBOAT = 7;
+
+  private String[] semester1 = new String[] {"BIN", "PANCASILA", "MAT 1", "FIS 1", "KIM", "DASPROG"};
+  private String[] semester2 = new String[] {"BIG", "KWN", "MAT 2", "FIS 2", "AGAMA", "STRUKDAT", "SISDIG"};
+  private String[] semester3 = new String[] {"ALIN", "KOMNUM", "ORKOM", "PBO", "SBD", "MATDIS"};
   
   // gameplay
   private int numDiamonds;
   private int totalDiamonds;
+
   private int numCourses;
   private int tempCredit;
   private int totalCourses;
   private int totalCredit;
+  private ArrayList<String> courseTaken;
+
   private boolean hasBoat;
   private boolean hasAxe;
   private boolean onWater;
@@ -53,6 +61,7 @@ public class Player extends Entity {
     
     numDiamonds = 0;
     numCourses = 0;
+    courseTaken = new ArrayList<String>();
     
     downSprites = Content.PLAYER[0];
     leftSprites = Content.PLAYER[1];
@@ -80,13 +89,65 @@ public class Player extends Entity {
   public void setTotalDiamonds(int i) { totalDiamonds = i; }
   
   public void collectedCourse(int i) { numCourses++; tempCredit += i;}
-  public void addCredit() {}
   public int numCourses() { return numCourses; }
   public int currentCredit() { return tempCredit; }
   public int getTotalCourses() { return totalCourses; }
   public int getTotalCredit() { return totalCredit; }
+  public ArrayList<String> getCourseTaken() { return courseTaken;}
   public void setTotalCourses(int i) { totalCourses = i; }
   public void setTotalCredit(int i) { totalCredit = i; }
+  public void takeCourse(String s) { courseTaken.add(s); }
+
+  public boolean courseInSemester2(String s) {
+    for (int i = 0; i < semester2.length; i++) {
+      if (s.equals(semester2[i])) return true;
+    }
+    return false;
+  }
+
+  public boolean courseInSemester3(String s) {
+    for (int i = 0; i < semester2.length; i++) {
+      if (s.equals(semester2[i])) return true;
+    }
+    return false;
+  }
+
+  public boolean passedSemester1() {
+    if (numCourses == 0) return false;
+    int check = 0;
+    for (int i = 0; i < semester1.length; i++) {
+      for (int j = 0; j < courseTaken.size(); j++) {
+        if (semester1[i].equals(courseTaken.get(j))) check++;
+        if (check == semester1.length) return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean passedSemester2() {
+    int check = 0;
+    int start = semester1.length;
+    for (int i = 0; i < semester2.length; i++) {
+      for (int j = start; j < courseTaken.size(); j++) {
+        if (semester2[i].equals(courseTaken.get(j))) check++;
+        if (check == semester2.length) return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean passedSemester3() {
+    int check = 0;
+    int start = semester2.length + semester1.length;
+    int end = semester3.length + start;
+    for (int i = 0; i < semester3.length; i++) {
+      for (int j = start; j < courseTaken.size() + 3; j++) {
+        if (semester3[i].equals(courseTaken.get(j))) check++;
+        if (check == semester3.length) return true;
+      }
+    }
+    return false;
+  }
   
   public void gotBoat() { hasBoat = true; tileMap.replace(22, 4); }
   public void gotAxe() { hasAxe = true; }

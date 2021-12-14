@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import com.TCourse.Entity.Player;
 import com.TCourse.Main.GamePanel;
@@ -22,6 +23,8 @@ public class Hud {
 
   private int creditUnit;
   private int countTicks;
+  private int semester;
+  private boolean isTaken;
   private String courseName;
 
   private Font font;
@@ -43,9 +46,14 @@ public class Hud {
 
   }
 
-  public void alreadyTaken(String s) {
+  public void alreadyTaken(String s, boolean b) {
     countTicks = 0;
     courseName = s;
+    isTaken = b;
+  }
+
+  public void hasNotFinished(int i) {
+    semester = i;
   }
 
   public void draw(Graphics2D g) {
@@ -75,8 +83,28 @@ public class Hud {
     }
 
     countTicks++;
-    if (countTicks <= 10 && player.numCourses() > 0)  Content.drawString(g, courseName, 16, 16);
-
+    if (isTaken && countTicks <= 30 && player.numCourses() > 0) {
+      Content.drawString(g, courseName, 16, 16);
+      isTaken = false;
+    } 
+    
+    if (countTicks >= 30 && countTicks <= 70 && player.numCourses() > 12 && player.passedSemester3()) {
+      Content.drawString(g, "You have passed", 4, 16);
+      Content.drawString(g, "SEMESTER 3", 24, 32);
+    }
+    else if (countTicks >= 30 && countTicks <= 70 && player.numCourses() > 6 && player.passedSemester2()) {
+      Content.drawString(g, "You have passed", 4, 16);
+      Content.drawString(g, "SEMESTER 2", 24, 32);
+    }
+    else if (countTicks >= 30 && countTicks <= 70 && player.numCourses() > 0 && player.passedSemester1()) {
+      Content.drawString(g, "You have passed", 4, 16);
+      Content.drawString(g, "SEMESTER 1", 24, 32);
+    }
+    
+    if (!isTaken && semester > 0 && countTicks <= 60) {
+      Content.drawString(g, "Please finish", 16, 16);
+      Content.drawString(g, "SEMESTER " + semester + " first", 4, 32);
+    }
   }
 
 }
