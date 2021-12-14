@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import com.TCourse.Entity.Player;
 import com.TCourse.Main.GamePanel;
@@ -15,7 +14,6 @@ public class Hud {
   private int yOffset;
 
   private BufferedImage bar;
-  private BufferedImage book;
   private BufferedImage boat;
   private BufferedImage axe;
 
@@ -23,8 +21,9 @@ public class Hud {
 
   private int creditUnit;
   private int countTicks;
+  private int countTicks2;
   private int semester;
-  private boolean isTaken;
+  private int currentSemester;
   private String courseName;
 
   private Font font;
@@ -37,22 +36,24 @@ public class Hud {
     yOffset = GamePanel.HEIGHT;
 
     bar = Content.BAR[0][0];
-    book = Content.BOOK[0][0];
     boat = Content.ITEMS[0][0];
     axe = Content.ITEMS[0][1];
 
     font = new Font("Arial", Font.PLAIN, 10);
     textColor = new Color(47, 64, 126);
 
+    semester = -1;
+    currentSemester = 1;
+
   }
 
-  public void alreadyTaken(String s, boolean b) {
+  public void alreadyTaken(String s) {
     countTicks = 0;
     courseName = s;
-    isTaken = b;
   }
 
   public void hasNotFinished(int i) {
+    countTicks2 = 0;
     semester = i;
   }
 
@@ -66,7 +67,7 @@ public class Hud {
     g.setColor(textColor);
     g.setFont(font);
     String s = player.currentCredit() + "/" + creditUnit;
-    Content.drawString(g, s, 40, yOffset + 3);
+    Content.drawString(g, s, 38, yOffset + 3);
 
     if (player.hasBoat()) g.drawImage(boat, 100, yOffset, null);
     if (player.hasAxe()) g.drawImage(axe, 112, yOffset, null);
@@ -83,28 +84,32 @@ public class Hud {
     }
 
     countTicks++;
-    if (isTaken && countTicks <= 30 && player.numCourses() > 0) {
+    if (countTicks <= 30 && player.numCourses() > 0) {
       Content.drawString(g, courseName, 16, 16);
-      isTaken = false;
-    } 
+    }
     
-    if (countTicks >= 30 && countTicks <= 70 && player.numCourses() > 12 && player.passedSemester3()) {
+    countTicks2++;
+    if (semester > 0 && countTicks2 <= 30) {
+      Content.drawString(g, "Please finish", 12, 16);
+      Content.drawString(g, "SEMESTER " + semester, 24, 32);
+      Content.drawString(g, "first", 44, 48);
+    }
+    
+    if (currentSemester == 3 && countTicks >= 30 && countTicks <= 70 && player.numCourses() > 12 && player.passedSemester3()) {
       Content.drawString(g, "You have passed", 4, 16);
       Content.drawString(g, "SEMESTER 3", 24, 32);
     }
-    else if (countTicks >= 30 && countTicks <= 70 && player.numCourses() > 6 && player.passedSemester2()) {
+    else if (currentSemester == 2 && countTicks >= 30 && countTicks <= 70 && player.numCourses() > 6 && player.passedSemester2()) {
       Content.drawString(g, "You have passed", 4, 16);
       Content.drawString(g, "SEMESTER 2", 24, 32);
+      if (countTicks == 70) currentSemester = 3;
     }
-    else if (countTicks >= 30 && countTicks <= 70 && player.numCourses() > 0 && player.passedSemester1()) {
+    else if (countTicks >= 30 && countTicks <= 70 && player.numCourses() > 0 && player.passedSemester1() && currentSemester == 1) {
       Content.drawString(g, "You have passed", 4, 16);
       Content.drawString(g, "SEMESTER 1", 24, 32);
+      if (countTicks == 70) currentSemester = 2;
     }
     
-    if (!isTaken && semester > 0 && countTicks <= 60) {
-      Content.drawString(g, "Please finish", 16, 16);
-      Content.drawString(g, "SEMESTER " + semester + " first", 4, 32);
-    }
   }
 
 }

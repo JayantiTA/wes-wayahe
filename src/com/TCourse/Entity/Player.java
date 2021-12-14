@@ -32,6 +32,11 @@ public class Player extends Entity {
   private String[] semester1 = new String[] {"BIN", "PANCASILA", "MAT 1", "FIS 1", "KIM", "DASPROG"};
   private String[] semester2 = new String[] {"BIG", "KWN", "MAT 2", "FIS 2", "AGAMA", "STRUKDAT", "SISDIG"};
   private String[] semester3 = new String[] {"ALIN", "KOMNUM", "ORKOM", "PBO", "SBD", "MATDIS"};
+
+  private String[] twoCredits = new String[] {"BIN", "PANCASILA", "BIG", "KWN", "AGAMA"};
+  private String[] threeCredits = new String[] {"MAT 1", "KIM", "MAT 2", "FIS 2", "STRUKDAT", "SISDIG", "ALIN", "KOMNUM", "ORKOM", "PBO", "MATDIS"};
+  private String[] fourCredits = new String[] {"DASPROG", "FIS 1", "SBD"};
+
   
   // gameplay
   private int numDiamonds;
@@ -106,8 +111,29 @@ public class Player extends Entity {
   }
 
   public boolean courseInSemester3(String s) {
-    for (int i = 0; i < semester2.length; i++) {
-      if (s.equals(semester2[i])) return true;
+    for (int i = 0; i < semester3.length; i++) {
+      if (s.equals(semester3[i])) return true;
+    }
+    return false;
+  }
+
+  public boolean isTwoCredits(String s) {
+    for (int i = 0; i < twoCredits.length; i++) {
+      if (s.equals(twoCredits[i])) return true;
+    }
+    return false;
+  }
+
+  public boolean isThreeCredits(String s) {
+    for (int i = 0; i < threeCredits.length; i++) {
+      if (s.equals(threeCredits[i])) return true;
+    }
+    return false;
+  }
+
+  public boolean isFourCredits(String s) {
+    for (int i = 0; i < fourCredits.length; i++) {
+      if (s.equals(fourCredits[i])) return true;
     }
     return false;
   }
@@ -128,7 +154,7 @@ public class Player extends Entity {
     int check = 0;
     int start = semester1.length;
     for (int i = 0; i < semester2.length; i++) {
-      for (int j = start; j < courseTaken.size(); j++) {
+      for (int j = 0; j < courseTaken.size(); j++) {
         if (semester2[i].equals(courseTaken.get(j))) check++;
         if (check == semester2.length) return true;
       }
@@ -139,7 +165,6 @@ public class Player extends Entity {
   public boolean passedSemester3() {
     int check = 0;
     int start = semester2.length + semester1.length;
-    int end = semester3.length + start;
     for (int i = 0; i < semester3.length; i++) {
       for (int j = start; j < courseTaken.size() + 3; j++) {
         if (semester3[i].equals(courseTaken.get(j))) check++;
