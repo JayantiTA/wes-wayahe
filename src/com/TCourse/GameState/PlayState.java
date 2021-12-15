@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import com.TCourse.Entity.Book;
-import com.TCourse.Entity.Course;
 import com.TCourse.Entity.Item;
 import com.TCourse.Entity.Player;
 import com.TCourse.Entity.Sparkle;
@@ -40,7 +39,6 @@ public class PlayState extends GameState {
   private boolean eventFinish;
   private int eventTick;
   private int currentPage;
-  private int countPage;
   private int prevPage;
   
   private ArrayList<Rectangle> boxes;
@@ -170,8 +168,6 @@ public class PlayState extends GameState {
       eventFinish = blockInput = true;
     }
     
-    int oldxs = xSector;
-    int oldys = ySector;
     xSector = player.getX() / sectorSize;
     ySector = player.getY() / sectorSize;
     tileMap.setPosition(-xSector * sectorSize, -ySector * sectorSize);
