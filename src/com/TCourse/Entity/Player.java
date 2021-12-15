@@ -48,8 +48,10 @@ public class Player extends Entity {
   private int totalCredit;
   private ArrayList<String> courseTaken;
 
-  private boolean hasBoat;
   private boolean hasAxe;
+  private boolean hasPickaxe;
+  private boolean hasBoat;
+  private boolean hasKey;
   private boolean onWater;
   private long ticks;
   
@@ -152,7 +154,6 @@ public class Player extends Entity {
 
   public boolean passedSemester2() {
     int check = 0;
-    int start = semester1.length;
     for (int i = 0; i < semester2.length; i++) {
       for (int j = 0; j < courseTaken.size(); j++) {
         if (semester2[i].equals(courseTaken.get(j))) check++;
@@ -174,10 +175,14 @@ public class Player extends Entity {
     return false;
   }
   
-  public void gotBoat() { hasBoat = true; tileMap.replace(22, 4); }
   public void gotAxe() { hasAxe = true; }
-  public boolean hasBoat() { return hasBoat; }
+  public void gotPickaxe() { hasPickaxe = true; }
+  public void gotBoat() { hasBoat = true; tileMap.replace(22, 4); }
+  public void gotKey() { hasKey = true; }
   public boolean hasAxe() { return hasAxe; }
+  public boolean hasPickaxe() { return hasPickaxe; }
+  public boolean hasBoat() { return hasBoat; }
+  public boolean hasKey() { return hasKey; }
   
   public long getTicks() { return ticks; }
   
