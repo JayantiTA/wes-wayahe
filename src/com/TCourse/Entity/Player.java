@@ -32,10 +32,12 @@ public class Player extends Entity {
   private String[] semester1 = new String[] {"BIN", "PANCASILA", "MAT 1", "FIS 1", "KIM", "DASPROG"};
   private String[] semester2 = new String[] {"BIG", "KWN", "MAT 2", "FIS 2", "AGAMA", "STRUKDAT", "SISDIG"};
   private String[] semester3 = new String[] {"ALIN", "KOMNUM", "ORKOM", "PBO", "SBD", "MATDIS"};
+  private String[] semester4 = new String[] {"PAA", "PROBSTAT", "APSI", "KB", "MBD", "SISOP"};
 
   private String[] twoCredits = new String[] {"BIN", "PANCASILA", "BIG", "KWN", "AGAMA"};
-  private String[] threeCredits = new String[] {"MAT 1", "KIM", "MAT 2", "FIS 2", "STRUKDAT", "SISDIG", "ALIN", "KOMNUM", "ORKOM", "PBO", "MATDIS"};
-  private String[] fourCredits = new String[] {"DASPROG", "FIS 1", "SBD"};
+  private String[] threeCredits = new String[] {"MAT 1", "KIM", "MAT 2", "FIS 2", "STRUKDAT", "SISDIG", "MATDIS", "ALIN", "KOMNUM", 
+                                  "PBO", "ORKOM", "PROBSTAT", "APSI", "KB", "SISOP", "IMK", "TGO", "PBKK"};
+  private String[] fourCredits = new String[] {"DASPROG", "FIS 1", "SBD", "PAA", "MBD"};
 
   
   // gameplay
@@ -118,7 +120,14 @@ public class Player extends Entity {
     }
     return false;
   }
-
+  
+  public boolean courseInSemester4(String s) {
+    for (int i = 0; i < semester4.length; i++) {
+      if (s.equals(semester4[i])) return true;
+    }
+    return false;
+  }
+  
   public boolean isTwoCredits(String s) {
     for (int i = 0; i < twoCredits.length; i++) {
       if (s.equals(twoCredits[i])) return true;
@@ -149,6 +158,7 @@ public class Player extends Entity {
         if (check == semester1.length) return true;
       }
     }
+    System.out.println(check);
     return false;
   }
 
@@ -165,11 +175,21 @@ public class Player extends Entity {
 
   public boolean passedSemester3() {
     int check = 0;
-    int start = semester2.length + semester1.length;
     for (int i = 0; i < semester3.length; i++) {
-      for (int j = start; j < courseTaken.size() + 3; j++) {
+      for (int j = 0; j < courseTaken.size(); j++) {
         if (semester3[i].equals(courseTaken.get(j))) check++;
         if (check == semester3.length) return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean passedSemester4() {
+    int check = 0;
+    for (int i = 0; i < semester4.length; i++) {
+      for (int j = 0; j < courseTaken.size(); j++) {
+        if (semester3[i].equals(courseTaken.get(j))) check++;
+        if (check == semester4.length) return true;
       }
     }
     return false;

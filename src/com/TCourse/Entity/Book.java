@@ -16,8 +16,11 @@ public class Book extends Entity {
   private String courseName;
 
   private String[] twoCredits = new String[] {"BIN", "PANCASILA", "BIG", "KWN"};
-  private String[] threeCredits = new String[] {"MAT 1", "KIM", "MAT 2", "FIS 2", "STRUKDAT", "SISDIG", "MATDIS", "ALIN", "KOMNUM", "PBO", "ORKOM"};
-  private String[] fourCredits = new String[] {"DASPROG", "FIS 1", "SBD"};
+  private String[] threeCredits = new String[] {"MAT 1", "KIM", "MAT 2", "FIS 2", "STRUKDAT", "SISDIG", "MATDIS", "ALIN", "KOMNUM", 
+                                  "PBO", "ORKOM", "PROBSTAT", "IMK", "TGO", "PBKK"};
+  private String[] fourCredits = new String[] {"DASPROG", "FIS 1", "SBD", "PAA"};
+
+  private String[] specialCourse = new String[] {"MATDIS", "PAA", "PROBSTAT", "IMK", "TGO", "PBKK"};
   
   public Book(TileMap tm, String s) {
     
@@ -26,7 +29,7 @@ public class Book extends Entity {
     width = height = 16;
     cWidth = cHeight = 12;
 
-    sprites = Content.BOOK[0];
+    sprites = isSpecialCourse(s) ? Content.BOOK2[0] : Content.BOOK1[0];
     animation.setFrames(sprites);
     animation.setDelay(10);
     
@@ -51,6 +54,13 @@ public class Book extends Entity {
   public boolean fourCredits() {
     for (int i = 0; i < fourCredits.length; i++) {
       if (courseName.equals(fourCredits[i])) return true;
+    }
+    return false;
+  }
+
+  public boolean isSpecialCourse(String s) {
+    for (int i = 0; i < specialCourse.length; i++) {
+      if (specialCourse[i].equals(s)) return true;
     }
     return false;
   }

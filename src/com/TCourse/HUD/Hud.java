@@ -102,7 +102,11 @@ public class Hud {
       Content.drawString(g, "first", 44, 48);
     }
     
-    if (currentSemester == 3 && countTicks >= 30 && countTicks <= 70 && player.numCourses() > 12 && player.passedSemester3()) {
+    if (currentSemester == 4 && countTicks >= 30 && countTicks <= 70 && player.numCourses() > 12 && player.passedSemester3()) {
+      Content.drawString(g, "You have passed", 4, 16);
+      Content.drawString(g, "SEMESTER 4", 24, 32);
+    }
+    else if (currentSemester == 3 && countTicks >= 30 && countTicks <= 70 && player.numCourses() > 12 && player.passedSemester3()) {
       Content.drawString(g, "You have passed", 4, 16);
       Content.drawString(g, "SEMESTER 3", 24, 32);
     }
