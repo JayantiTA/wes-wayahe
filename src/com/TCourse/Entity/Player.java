@@ -283,7 +283,7 @@ public class Player extends Entity {
     boolean current = onWater;
     int positionNow = tileMap.getIndex(yDest / tileSize, xDest / tileSize);
     
-    if (positionNow == 4 || positionNow == 10) {
+    if (positionNow == 4 || positionNow == 9 || positionNow == 10) {
       onWater = true;
     }
     else {
