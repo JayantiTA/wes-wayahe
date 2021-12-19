@@ -200,6 +200,7 @@ public class Player extends Entity {
   }
   
   public void setAction() {
+
     if (hasAxe) {
       if (currentAnimation == UP && tileMap.getIndex(rowTile - 1, colTile) == 21) {
         tileMap.setTile(rowTile - 1, colTile, 1);
@@ -214,6 +215,50 @@ public class Player extends Entity {
         tileMap.setTile(rowTile, colTile + 1, 1);
       }
     }
+
+    if (hasPickaxe) {
+      if (currentAnimation == UP && tileMap.getIndex(rowTile - 1, colTile) == 26) {
+        tileMap.setTile(rowTile - 1, colTile, 6);
+      }
+      if (currentAnimation == DOWN && tileMap.getIndex(rowTile + 1, colTile) == 26) {
+        tileMap.setTile(rowTile + 1, colTile, 6);
+      }
+      if (currentAnimation == LEFT && tileMap.getIndex(rowTile, colTile - 1) == 26) {
+        tileMap.setTile(rowTile, colTile - 1, 6);
+      }
+      if (currentAnimation == RIGHT && tileMap.getIndex(rowTile, colTile + 1) == 26) {
+        tileMap.setTile(rowTile, colTile + 1, 6);
+      }
+    }
+
+    if (hasKey) {
+      if (currentAnimation == UP) {
+        if (tileMap.getIndex(rowTile - 1, colTile) == 23)
+          tileMap.setTile(rowTile - 1, colTile, 1);
+        else if (tileMap.getIndex(rowTile - 1, colTile) == 24)
+          tileMap.setTile(rowTile - 1, colTile, 6);
+      }
+      if (currentAnimation == DOWN) {
+        if (tileMap.getIndex(rowTile + 1, colTile) == 23)
+          tileMap.setTile(rowTile + 1, colTile, 1);
+        else if (tileMap.getIndex(rowTile + 1, colTile) == 24)
+          tileMap.setTile(rowTile + 1, colTile, 6);
+      }
+      if (currentAnimation == LEFT) {
+        if (tileMap.getIndex(rowTile, colTile - 1) == 23)
+          tileMap.setTile(rowTile, colTile - 1, 1);
+        else if (tileMap.getIndex(rowTile, colTile - 1) == 24)
+          tileMap.setTile(rowTile, colTile - 1, 6);
+      }
+      if (currentAnimation == RIGHT) {
+        if (tileMap.getIndex(rowTile, colTile + 1) == 23)
+          tileMap.setTile(rowTile, colTile + 1, 1);
+        else if (tileMap.getIndex(rowTile, colTile + 1) == 24)
+          tileMap.setTile(rowTile, colTile + 1, 6);
+      }
+      hasKey = false;
+    }
+
   }
   
   public void update() {
@@ -221,7 +266,9 @@ public class Player extends Entity {
     ticks++;
     
     boolean current = onWater;
-    if (tileMap.getIndex(yDest / tileSize, xDest / tileSize) == 4 || tileMap.getIndex(yDest / tileSize, xDest / tileSize) == 10) {
+    int positionNow = tileMap.getIndex(yDest / tileSize, xDest / tileSize);
+    
+    if (positionNow == 4 || positionNow == 10) {
       onWater = true;
     }
     else {

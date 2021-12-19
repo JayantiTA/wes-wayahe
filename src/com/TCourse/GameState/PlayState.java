@@ -87,8 +87,6 @@ public class PlayState extends GameState {
 
     b = new Book(tileMap, "DASPROG");
     b.setTilePosition(20, 20);
-		b.addChange(new int[] { 23, 19, 1 });
-		b.addChange(new int[] { 23, 20, 1 });
 		books.add(b);
     b = new Book(tileMap, "MAT 1");
     b.setTilePosition(20,21);
@@ -157,6 +155,23 @@ public class PlayState extends GameState {
     item.setType(Item.BOAT);
     item.setTilePosition(17, 22);
     items.add(item);
+
+    item = new Item(tileMap);
+    item.setType(Item.PICKAXE);
+    item.setTilePosition(17, 22);
+    items.add(item);
+
+    item = new Item(tileMap);
+    item.setType(Item.KEY);
+    item.setTilePosition(20, 17);
+    items.add(item);
+
+    // if (player.passedSemester2()) {
+      item = new Item(tileMap);
+      item.setType(Item.KEY);
+      item.setTilePosition(37, 35);
+      items.add(item);
+    // }
     
   }
   

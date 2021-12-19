@@ -16,6 +16,8 @@ public class Hud {
   private BufferedImage bar;
   private BufferedImage boat;
   private BufferedImage axe;
+  private BufferedImage pickaxe;
+  private BufferedImage key;
 
   private Player player;
 
@@ -36,8 +38,11 @@ public class Hud {
     yOffset = GamePanel.HEIGHT;
 
     bar = Content.BAR[0][0];
-    boat = Content.ITEMS[0][0];
-    axe = Content.ITEMS[0][1];
+    axe = Content.ITEMS[0][0];
+    pickaxe = Content.ITEMS[0][1];
+    boat = Content.ITEMS[0][2];
+    key = Content.ITEMS[0][3];
+
 
     font = new Font("Arial", Font.PLAIN, 10);
     textColor = new Color(47, 64, 126);
@@ -70,7 +75,9 @@ public class Hud {
     Content.drawString(g, s, 38, yOffset + 3);
 
     if (player.hasBoat()) g.drawImage(boat, 100, yOffset, null);
-    if (player.hasAxe()) g.drawImage(axe, 112, yOffset, null);
+    if (player.hasAxe()) g.drawImage(axe, 88, yOffset, null);
+    if (player.hasPickaxe()) g.drawImage(pickaxe, 112, yOffset, null);
+    if (player.hasKey()) g.drawImage(key, 76, yOffset, null);
 
     int minutes = (int) (player.getTicks() / 1800);
     int seconds = (int) ((player.getTicks() / 30) % 60);
