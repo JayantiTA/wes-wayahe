@@ -221,7 +221,7 @@ public class Player extends Entity {
     ticks++;
     
     boolean current = onWater;
-    if (tileMap.getIndex(yDest / tileSize, xDest / tileSize) == 4) {
+    if (tileMap.getIndex(yDest / tileSize, xDest / tileSize) == 4 || tileMap.getIndex(yDest / tileSize, xDest / tileSize) == 10) {
       onWater = true;
     }
     else {

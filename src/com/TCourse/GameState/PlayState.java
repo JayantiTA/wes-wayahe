@@ -118,19 +118,22 @@ public class PlayState extends GameState {
     b.setTilePosition(21, 22);
 		books.add(b);
     b = new Book(tileMap, "KWN");
-    b.setTilePosition(20, 30);
+    b.setTilePosition(18, 20);
 		books.add(b);
     b = new Book(tileMap, "BIG");
-    b.setTilePosition(14, 25);
+    b.setTilePosition(17, 22);
 		books.add(b);
     b = new Book(tileMap, "STRUKDAT");
-    b.setTilePosition(4, 21);
+    b.setTilePosition(19, 21);
 		books.add(b);
     b = new Book(tileMap, "SISDIG");
-    b.setTilePosition(9, 14);
+    b.setTilePosition(19, 20);
+		books.add(b);
+    b = new Book(tileMap, "AGAMA");
+    b.setTilePosition(18, 19);
 		books.add(b);
     b = new Book(tileMap, "MATDIS");
-    b.setTilePosition(4, 3);
+    b.setTilePosition(18, 18);
 		books.add(b);
     // b = new Book(tileMap);
     // b.setTilePosition(20, 14);
@@ -147,12 +150,12 @@ public class PlayState extends GameState {
     
     item = new Item(tileMap);
     item.setType(Item.AXE);
-    item.setTilePosition(26, 37);
+    item.setTilePosition(22, 22);
     items.add(item);
     
     item = new Item(tileMap);
     item.setType(Item.BOAT);
-    item.setTilePosition(12, 4);
+    item.setTilePosition(17, 22);
     items.add(item);
     
   }
