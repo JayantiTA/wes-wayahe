@@ -21,7 +21,7 @@ public class FinishState extends GameState {
 	}
 	
 	public void init() {
-		// color = new Color(164, 198, 222);
+		color = new Color(164, 198, 222);
 		ticks = DataTime.getTime();
 		if (ticks < 3600) rank = 1;
 		else if (ticks < 5400) rank = 2;
@@ -29,12 +29,14 @@ public class FinishState extends GameState {
 		else rank = 4;
 	}
 	
-	public void update() {}
+	public void update() {
+		handleInput();
+	}
 	
 	public void draw(Graphics2D g) {
 		
-		// g.setColor(color);
-		// g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT_TOTAL);
+		g.setColor(color);
+		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT_TOTAL);
 		
 		Content.drawString(g, "finish time", 20, 36);
 		
@@ -55,7 +57,7 @@ public class FinishState extends GameState {
 		else if (rank == 3) Content.drawString(g, "beginner", 32, 78);
 		else if (rank == 4) Content.drawString(g, "bumbling idiot", 8, 78);
 		
-		Content.drawString(g, "press any key", 12, 110);
+		Content.drawString(g, "press enter", 20, 110);
 		
 	}
 	
