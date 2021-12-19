@@ -37,6 +37,8 @@ public class PlayState extends GameState {
   private boolean blockInput;
   private boolean eventStart;
   private boolean eventFinish;
+  private boolean firstItem;
+  private boolean updateItem;
   private int eventTick;
   private int currentPage;
   private int prevPage;
@@ -59,6 +61,8 @@ public class PlayState extends GameState {
     
     player = new Player(tileMap);
     
+    firstItem = true;
+    updateItem = false;
     populateBooks();
     populateItems();
     
@@ -145,33 +149,39 @@ public class PlayState extends GameState {
   private void populateItems() {
     
     Item item;
-    
-    item = new Item(tileMap);
-    item.setType(Item.AXE);
-    item.setTilePosition(22, 22);
-    items.add(item);
-    
-    item = new Item(tileMap);
-    item.setType(Item.BOAT);
-    item.setTilePosition(17, 22);
-    items.add(item);
 
-    item = new Item(tileMap);
-    item.setType(Item.PICKAXE);
-    item.setTilePosition(17, 22);
-    items.add(item);
-
-    item = new Item(tileMap);
-    item.setType(Item.KEY);
-    item.setTilePosition(20, 17);
-    items.add(item);
-
-    // if (player.passedSemester2()) {
+    if (!firstItem) {
       item = new Item(tileMap);
       item.setType(Item.KEY);
       item.setTilePosition(37, 35);
       items.add(item);
-    // }
+      updateItem = true;
+    }
+    
+    if (firstItem) {
+
+      item = new Item(tileMap);
+      item.setType(Item.AXE);
+      item.setTilePosition(22, 22);
+      items.add(item);
+      
+      item = new Item(tileMap);
+      item.setType(Item.BOAT);
+      item.setTilePosition(17, 22);
+      items.add(item);
+  
+      item = new Item(tileMap);
+      item.setType(Item.PICKAXE);
+      item.setTilePosition(17, 22);
+      items.add(item);
+  
+      item = new Item(tileMap);
+      item.setType(Item.KEY);
+      item.setTilePosition(20, 17);
+      items.add(item);
+
+      firstItem = false;
+    }
     
   }
   
@@ -181,6 +191,7 @@ public class PlayState extends GameState {
     
     if (eventStart) eventStart();
     if (eventFinish) eventFinish();
+    if (player.passedSemester2() && !updateItem) populateItems();
     
     if (player.numCourses() == player.getTotalCourses()) {
       eventFinish = blockInput = true;
@@ -210,7 +221,6 @@ public class PlayState extends GameState {
         }
 
         if (player.courseInSemester3(b.getCourseName()) && !player.passedSemester2()) {
-          System.out.println("masuk sini");
           hud.hasNotFinished(2);
           return;
         }
