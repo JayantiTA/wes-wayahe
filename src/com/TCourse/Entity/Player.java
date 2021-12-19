@@ -158,7 +158,6 @@ public class Player extends Entity {
         if (check == semester1.length) return true;
       }
     }
-    System.out.println(check);
     return false;
   }
 
