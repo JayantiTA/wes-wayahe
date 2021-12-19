@@ -9,19 +9,19 @@ import com.TCourse.Manager.DataTime;
 import com.TCourse.Manager.GameStateManager;
 import com.TCourse.Manager.Keys;
 
-public class GameOverState extends GameState {
+public class FinishState extends GameState {
 	
 	private Color color;
 	
 	private int rank;
 	private long ticks;
 	
-	public GameOverState(GameStateManager gsm) {
+	public FinishState(GameStateManager gsm) {
 		super(gsm);
 	}
 	
 	public void init() {
-		color = new Color(164, 198, 222);
+		// color = new Color(164, 198, 222);
 		ticks = DataTime.getTime();
 		if (ticks < 3600) rank = 1;
 		else if (ticks < 5400) rank = 2;
@@ -33,8 +33,8 @@ public class GameOverState extends GameState {
 	
 	public void draw(Graphics2D g) {
 		
-		g.setColor(color);
-		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT_TOTAL);
+		// g.setColor(color);
+		// g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT_TOTAL);
 		
 		Content.drawString(g, "finish time", 20, 36);
 		
@@ -45,7 +45,7 @@ public class GameOverState extends GameState {
 			else Content.drawString(g, "0" + minutes + ":" + seconds, 44, 48);
 		}
 		else {
-			if(seconds < 10) Content.drawString(g, minutes + ":0" + seconds, 44, 48);
+			if (seconds < 10) Content.drawString(g, minutes + ":0" + seconds, 44, 48);
 			else Content.drawString(g, minutes + ":" + seconds, 44, 48);
 		}
 		
@@ -60,7 +60,7 @@ public class GameOverState extends GameState {
 	}
 	
 	public void handleInput() {
-		if(Keys.isPressed(Keys.ENTER)) {
+		if (Keys.isPressed(Keys.ENTER)) {
 			gsm.setState(GameStateManager.MENU);
 		}
 	}

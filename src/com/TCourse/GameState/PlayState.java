@@ -436,7 +436,7 @@ public class PlayState extends GameState {
     if (eventTick > 33) {
       if (eventFinish) {
         DataTime.setTime(player.getTicks());
-        gsm.setState(GameStateManager.GAMEOVER);
+        gsm.setState(GameStateManager.FINISH);
       }
     }
   }

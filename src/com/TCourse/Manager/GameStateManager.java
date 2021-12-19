@@ -7,6 +7,7 @@ import com.TCourse.GameState.IntroState;
 import com.TCourse.GameState.MenuState;
 import com.TCourse.GameState.PauseState;
 import com.TCourse.GameState.PlayState;
+import com.TCourse.GameState.FinishState;
 
 public class GameStateManager {
 
@@ -21,7 +22,7 @@ public class GameStateManager {
   public static final int INTRO = 0;
   public static final int MENU = 1;
   public static final int PLAY = 2;
-  public static final int GAMEOVER = 3;
+  public static final int FINISH = 3;
   
   public GameStateManager() {
     
@@ -37,18 +38,22 @@ public class GameStateManager {
     previousState = currentState;
     unloadState(previousState);
     currentState = i;
-    if(i == INTRO) {
+    if (i == INTRO) {
       gameStates[i] = new IntroState(this);
       gameStates[i].init();
     }
-    else if(i == MENU) {
+    else if (i == MENU) {
       gameStates[i] = new MenuState(this);
       gameStates[i].init();
     }
-    else if(i == PLAY) {
-        gameStates[i] = new PlayState(this);
-        gameStates[i].init();
-      }
+    else if (i == PLAY) {
+      gameStates[i] = new PlayState(this);
+      gameStates[i].init();
+    }
+    else if (i == FINISH) {
+      gameStates[i] = new FinishState(this);
+      gameStates[i].init();
+    }
   }
   
   public void setPaused(boolean b) {
