@@ -62,6 +62,10 @@ public class Hud {
     semester = i;
   }
 
+  public void setCreditUnit(int i) {
+    creditUnit = i;
+  }
+
   public void draw(Graphics2D g) {
 
     g.drawImage(bar, 0, yOffset, null);

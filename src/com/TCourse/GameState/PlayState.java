@@ -77,7 +77,7 @@ public class PlayState extends GameState {
     ySector = player.getY() / sectorSize;
     tileMap.setPositionImmediately(-xSector * sectorSize, -ySector * sectorSize);
     
-    hud = new Hud(player, player.getTotalCredit());
+    hud = new Hud(player, 37);
 
     currentPage = -1;
     prevPage = -1;
@@ -213,7 +213,7 @@ public class PlayState extends GameState {
   
       item = new Item(tileMap);
       item.setType(Item.KEY);
-      item.setTilePosition(20, 17);
+      item.setTilePosition(22, 18);
       items.add(item);
 
       firstItem = false;
@@ -236,10 +236,10 @@ public class PlayState extends GameState {
     if (eventStart) eventStart();
     if (eventFinish) eventFinish();
     if (player.passedSemester2() && !updateItem) populateItems();
-    // if (player.passedSemester2() && !updateCredit) {
-    //   player.setTotalCredit(75);
-    //   updateCredit = true;
-    // }
+    if (player.passedSemester2() && !updateCredit && player.hasKey()) {
+      hud.setCreditUnit(75);
+      updateCredit = true;
+    }
     
     if (player.currentCredit() == player.getTotalCredit()) {
       eventFinish = blockInput = true;
