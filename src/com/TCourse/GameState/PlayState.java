@@ -39,6 +39,7 @@ public class PlayState extends GameState {
   private boolean eventFinish;
   private boolean firstItem;
   private boolean updateItem;
+  private boolean updateCredit;
   private int eventTick;
   private int currentPage;
   private int prevPage;
@@ -63,11 +64,13 @@ public class PlayState extends GameState {
     
     firstItem = true;
     updateItem = false;
+    updateCredit = false;
     populateBooks();
     populateItems();
     
     player.setTilePosition(17, 17);
     player.setTotalCourses(20);
+    player.setTotalCredit(75);
     
     sectorSize = GamePanel.WIDTH;
     xSector = player.getX() / sectorSize;
@@ -87,56 +90,83 @@ public class PlayState extends GameState {
 
   private void populateBooks() {
     
-    Book b;
+    insertBook("DASPROG", 19, 20);
+    insertBook("MAT 1", 19, 21);
+    insertBook("FIS 1", 19, 19);
+    insertBook("KIM", 19, 18);
+    insertBook("BIN", 19, 17);
+    insertBook("PANCASILA", 19, 22);
+    insertBook("STRUKDAT", 20, 20);
+    insertBook("SISDIG", 20, 21);
+    insertBook("FIS 2", 20, 19);
+    insertBook("MAT 2", 20, 18);
+    insertBook("BIG", 20, 17);
+    insertBook("AGAMA", 20, 22);
+    insertBook("KWN", 21, 21);
+    insertBook("MATDIS", 21, 17);
+    insertBook("ALIN", 21, 20);
+    insertBook("KOMNUM", 21, 19);
+    insertBook("ORKOM", 21, 18);
+    insertBook("PBO", 21, 22);
+    insertBook("SBD", 22, 21);
+    insertBook("PROBSTAT", 22, 22);
+    insertBook("PAA", 22, 20);
+    // insertBook("APSI", 21, 19);
+    // insertBook("KB", 21, 18);
+    // insertBook("MBD", 21, 17);
+    // insertBook("SISOP", 21, 21);
+    // insertBook("IMK", 21, 22);
+    // insertBook("TGO", 22, 20);
+    // insertBook("PBKK", 22, 21);
 
-    b = new Book(tileMap, "DASPROG");
-    b.setTilePosition(20, 20);
-		books.add(b);
-    b = new Book(tileMap, "MAT 1");
-    b.setTilePosition(20,21);
-		b.addChange(new int[] { 31, 17, 1 });
-		books.add(b);
-    b = new Book(tileMap, "FIS 1");
-    b.setTilePosition(20, 22);
-    b.addChange(new int[] {27, 7, 1});
-		b.addChange(new int[] {28, 7, 1});
-		books.add(b);
-    b = new Book(tileMap, "KIM");
-    b.setTilePosition(20, 19);
-    b.addChange(new int[] { 31, 21, 1 });
-		books.add(b);
+    // b = new Book(tileMap, "DASPROG");
+    // b.setTilePosition(20, 20);
+		// books.add(b);
+    // b = new Book(tileMap, "MAT 1");
+    // b.setTilePosition(20,21);
+		// b.addChange(new int[] { 31, 17, 1 });
+		// books.add(b);
+    // b = new Book(tileMap, "FIS 1");
+    // b.setTilePosition(20, 22);
+    // b.addChange(new int[] {27, 7, 1});
+		// b.addChange(new int[] {28, 7, 1});
+		// books.add(b);
+    // b = new Book(tileMap, "KIM");
+    // b.setTilePosition(20, 19);
+    // b.addChange(new int[] { 31, 21, 1 });
+		// books.add(b);
 
 
-    b = new Book(tileMap, "BIN");
-    b.setTilePosition(20, 18);
-		books.add(b);
-    b = new Book(tileMap, "PANCASILA");
-    b.setTilePosition(21, 20);
-		books.add(b);
-    b = new Book(tileMap, "MAT 2");
-    b.setTilePosition(21, 21);
-		books.add(b);
-    b = new Book(tileMap, "FIS 2");
-    b.setTilePosition(21, 22);
-		books.add(b);
-    b = new Book(tileMap, "KWN");
-    b.setTilePosition(18, 20);
-		books.add(b);
-    b = new Book(tileMap, "BIG");
-    b.setTilePosition(17, 22);
-		books.add(b);
-    b = new Book(tileMap, "STRUKDAT");
-    b.setTilePosition(19, 21);
-		books.add(b);
-    b = new Book(tileMap, "SISDIG");
-    b.setTilePosition(19, 20);
-		books.add(b);
-    b = new Book(tileMap, "AGAMA");
-    b.setTilePosition(18, 19);
-		books.add(b);
-    b = new Book(tileMap, "MATDIS");
-    b.setTilePosition(18, 18);
-		books.add(b);
+    // b = new Book(tileMap, "BIN");
+    // b.setTilePosition(20, 18);
+		// books.add(b);
+    // b = new Book(tileMap, "PANCASILA");
+    // b.setTilePosition(21, 20);
+		// books.add(b);
+    // b = new Book(tileMap, "MAT 2");
+    // b.setTilePosition(21, 21);
+		// books.add(b);
+    // b = new Book(tileMap, "FIS 2");
+    // b.setTilePosition(21, 22);
+		// books.add(b);
+    // b = new Book(tileMap, "KWN");
+    // b.setTilePosition(18, 20);
+		// books.add(b);
+    // b = new Book(tileMap, "BIG");
+    // b.setTilePosition(17, 22);
+		// books.add(b);
+    // b = new Book(tileMap, "STRUKDAT");
+    // b.setTilePosition(19, 21);
+		// books.add(b);
+    // b = new Book(tileMap, "SISDIG");
+    // b.setTilePosition(19, 20);
+		// books.add(b);
+    // b = new Book(tileMap, "AGAMA");
+    // b.setTilePosition(18, 19);
+		// books.add(b);
+    // b = new Book(tileMap, "MATDIS");
+    // b.setTilePosition(18, 18);
+		// books.add(b);
     // b = new Book(tileMap);
     // b.setTilePosition(20, 14);
 		// books.add(b);
@@ -144,6 +174,12 @@ public class PlayState extends GameState {
     // b.setTilePosition(13, 20);
 		// books.add(b);
 
+  }
+
+  private void insertBook(String s, int y, int x) {
+    Book b = new Book(tileMap, s);
+    b.setTilePosition(y, x);
+    books.add(b);
   }
   
   private void populateItems() {
@@ -162,7 +198,7 @@ public class PlayState extends GameState {
 
       item = new Item(tileMap);
       item.setType(Item.AXE);
-      item.setTilePosition(22, 22);
+      item.setTilePosition(22, 17);
       items.add(item);
       
       item = new Item(tileMap);
@@ -177,12 +213,20 @@ public class PlayState extends GameState {
   
       item = new Item(tileMap);
       item.setType(Item.KEY);
-      item.setTilePosition(20, 17);
+      item.setTilePosition(22, 18);
       items.add(item);
 
       firstItem = false;
     }
     
+  }
+
+  private boolean eligible(String s) {
+    if (s.equals("MATDIS") && player.passedSemester1())
+      return true;
+    if ((s.equals("PROBSTAT") || s.equals("PAA")) && player.passedSemester2())
+      return true;
+    return false;
   }
   
   public void update() {
@@ -192,8 +236,12 @@ public class PlayState extends GameState {
     if (eventStart) eventStart();
     if (eventFinish) eventFinish();
     if (player.passedSemester2() && !updateItem) populateItems();
+    if (player.passedSemester2() && !updateCredit && player.hasKey()) {
+      hud.setCreditUnit(75);
+      updateCredit = true;
+    }
     
-    if (player.numCourses() == player.getTotalCourses()) {
+    if (player.currentCredit() == player.getTotalCredit()) {
       eventFinish = blockInput = true;
     }
     
@@ -215,13 +263,20 @@ public class PlayState extends GameState {
       
       if (player.intersects(b)) {
 
-        if (player.courseInSemester2(b.getCourseName()) && !player.passedSemester1()) {
+        if ((player.courseInSemester2(b.getCourseName()) || player.courseInSemester3(b.getCourseName()) || 
+          player.courseInSemester4(b.getCourseName())) && !player.passedSemester1()) {
           hud.hasNotFinished(1);
           return;
         }
 
-        if (player.courseInSemester3(b.getCourseName()) && !player.passedSemester2()) {
+        if (!eligible(b.getCourseName()) && (player.courseInSemester3(b.getCourseName()) ||
+          player.courseInSemester4(b.getCourseName())) && !player.passedSemester2()) {
           hud.hasNotFinished(2);
+          return;
+        }
+
+        if (!eligible(b.getCourseName()) && player.courseInSemester4(b.getCourseName()) && !player.passedSemester3()) {
+          hud.hasNotFinished(3);
           return;
         }
         

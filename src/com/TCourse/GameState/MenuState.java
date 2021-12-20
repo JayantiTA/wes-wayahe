@@ -27,7 +27,7 @@ public class MenuState extends GameState{
   public void init() {
     try {
       background = Content.MENUBG[0][0];
-      book = Content.BOOK[0][0];
+      book = Content.BOOK1[0][0];
     }
     catch (Exception e) {
       e.printStackTrace();
