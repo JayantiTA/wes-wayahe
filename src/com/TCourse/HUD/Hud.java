@@ -139,6 +139,13 @@ public class Hud {
       else Content.drawString(g, minutes + ":" + seconds, 85, 3);
     }
 
+    if (player.wrongKey()) {
+      for (int i = 0; i < 90; i++) {
+        Content.drawString(g, "WRONG KEY!", 28, 16);
+      }
+      player.setWrongKey();
+    }
+
     countTicks++;
     if (countTicks <= 50 && player.numCourses() > 0) {
       String stringName = ListCourses.getFullName(courseName);
@@ -171,20 +178,20 @@ public class Hud {
       Content.drawString(g, "first", 44, 48);
     }
     
-    if (currentSemester == 4 && countTicks >= 30 && countTicks <= 70 && player.numCourses() > 12 && player.passedSemester3()) {
+    if (currentSemester == 4 && countTicks >= 50 && countTicks <= 80 && player.numCourses() > 12 && player.passedSemester3()) {
       Content.drawString(g, "You have passed", 4, 16);
       Content.drawString(g, "SEMESTER 4", 24, 32);
     }
-    else if (currentSemester == 3 && countTicks >= 30 && countTicks <= 70 && player.numCourses() > 12 && player.passedSemester3()) {
+    else if (currentSemester == 3 && countTicks >= 50 && countTicks <= 80 && player.numCourses() > 12 && player.passedSemester3()) {
       Content.drawString(g, "You have passed", 4, 16);
       Content.drawString(g, "SEMESTER 3", 24, 32);
     }
-    else if (currentSemester == 2 && countTicks >= 30 && countTicks <= 70 && player.numCourses() > 6 && player.passedSemester2()) {
+    else if (currentSemester == 2 && countTicks >= 50 && countTicks <= 80 && player.numCourses() > 6 && player.passedSemester2()) {
       Content.drawString(g, "You have passed", 4, 16);
       Content.drawString(g, "SEMESTER 2", 24, 32);
       if (countTicks == 70) currentSemester = 3;
     }
-    else if (countTicks >= 30 && countTicks <= 70 && player.numCourses() > 0 && player.passedSemester1() && currentSemester == 1) {
+    else if (countTicks >= 50 && countTicks <= 80 && player.numCourses() > 0 && player.passedSemester1() && currentSemester == 1) {
       Content.drawString(g, "You have passed", 4, 16);
       Content.drawString(g, "SEMESTER 1", 24, 32);
       if (countTicks == 70) currentSemester = 2;

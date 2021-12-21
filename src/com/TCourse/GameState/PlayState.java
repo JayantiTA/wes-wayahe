@@ -134,61 +134,6 @@ public class PlayState extends GameState {
     insertBook("TGO", 43, 16);
     insertBook("PBKK", 51, 8);
 
-    // b = new Book(tileMap, "DASPROG");
-    // b.setTilePosition(20, 20);
-		// books.add(b);
-    // b = new Book(tileMap, "MAT 1");
-    // b.setTilePosition(20,21);
-		// b.addChange(new int[] { 31, 17, 1 });
-		// books.add(b);
-    // b = new Book(tileMap, "FIS 1");
-    // b.setTilePosition(20, 22);
-    // b.addChange(new int[] {27, 7, 1});
-		// b.addChange(new int[] {28, 7, 1});
-		// books.add(b);
-    // b = new Book(tileMap, "KIM");
-    // b.setTilePosition(20, 19);
-    // b.addChange(new int[] { 31, 21, 1 });
-		// books.add(b);
-
-
-    // b = new Book(tileMap, "BIN");
-    // b.setTilePosition(20, 18);
-		// books.add(b);
-    // b = new Book(tileMap, "PANCASILA");
-    // b.setTilePosition(21, 20);
-		// books.add(b);
-    // b = new Book(tileMap, "MAT 2");
-    // b.setTilePosition(21, 21);
-		// books.add(b);
-    // b = new Book(tileMap, "FIS 2");
-    // b.setTilePosition(21, 22);
-		// books.add(b);
-    // b = new Book(tileMap, "KWN");
-    // b.setTilePosition(18, 20);
-		// books.add(b);
-    // b = new Book(tileMap, "BIG");
-    // b.setTilePosition(17, 22);
-		// books.add(b);
-    // b = new Book(tileMap, "STRUKDAT");
-    // b.setTilePosition(19, 21);
-		// books.add(b);
-    // b = new Book(tileMap, "SISDIG");
-    // b.setTilePosition(19, 20);
-		// books.add(b);
-    // b = new Book(tileMap, "AGAMA");
-    // b.setTilePosition(18, 19);
-		// books.add(b);
-    // b = new Book(tileMap, "MATDIS");
-    // b.setTilePosition(18, 18);
-		// books.add(b);
-    // b = new Book(tileMap);
-    // b.setTilePosition(20, 14);
-		// books.add(b);
-    // b = new Book(tileMap);
-    // b.setTilePosition(13, 20);
-		// books.add(b);
-
   }
 
   private void insertBook(String s, int y, int x) {

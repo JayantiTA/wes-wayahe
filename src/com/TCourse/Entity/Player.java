@@ -57,6 +57,7 @@ public class Player extends Entity {
   private boolean hasBoat;
   private boolean hasKey;
   private boolean onWater;
+  private boolean wrongKey;
   private long ticks;
   
   public Player(TileMap tm) {
@@ -207,10 +208,12 @@ public class Player extends Entity {
   public void gotPickaxe() { hasPickaxe = true; }
   public void gotBoat() { hasBoat = true; tileMap.replace(22, 4); }
   public void gotKey() { hasKey = true; }
+  public void setWrongKey() { wrongKey = false; }
   public boolean hasAxe() { return hasAxe; }
   public boolean hasPickaxe() { return hasPickaxe; }
   public boolean hasBoat() { return hasBoat; }
   public boolean hasKey() { return hasKey; }
+  public boolean wrongKey() { return wrongKey; }
   
   public long getTicks() { return ticks; }
   
@@ -275,6 +278,9 @@ public class Player extends Entity {
   				JukeBox.play("open_door");
           hasKey = false;
         }
+        else if (tileMap.getIndex(rowTile - 1, colTile) == 34) {
+          wrongKey = true;
+        }
       }
       if (currentAnimation == DOWN) {
         if (tileMap.getIndex(rowTile + 1, colTile) == 23) {
@@ -286,6 +292,9 @@ public class Player extends Entity {
           tileMap.setTile(rowTile + 1, colTile, 6);
   				JukeBox.play("open_door");
           hasKey = false;
+        }
+        else if (tileMap.getIndex(rowTile + 1, colTile) == 34) {
+          wrongKey = true;
         }
       }
       if (currentAnimation == LEFT) {
@@ -299,6 +308,9 @@ public class Player extends Entity {
   				JukeBox.play("open_door");
           hasKey = false;
         }
+        else if (tileMap.getIndex(rowTile, colTile - 1) == 34) {
+          wrongKey = true;
+        }
       }
       if (currentAnimation == RIGHT) {
         if (tileMap.getIndex(rowTile, colTile + 1) == 23) {
@@ -310,6 +322,9 @@ public class Player extends Entity {
           tileMap.setTile(rowTile, colTile + 1, 6);
   				JukeBox.play("open_door");
           hasKey = false;
+        }
+        else if (tileMap.getIndex(rowTile, colTile + 1) == 34) {
+          wrongKey = true;
         }
       }
     }
