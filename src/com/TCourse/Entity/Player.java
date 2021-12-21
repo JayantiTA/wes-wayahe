@@ -231,7 +231,7 @@ public class Player extends Entity {
   }
 
   public boolean inSpring() {
-    if (tileMap.getY() < 40) return true;
+    if (tileMap.getIndex(rowTile, colTile) < 6) return true;
     return false;
   }
   
