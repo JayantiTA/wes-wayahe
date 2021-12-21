@@ -31,6 +31,27 @@ public class Hud {
   private Font font;
   private Color textColor;
 
+  // public enum ListCourses {
+  //   MAT1("MAT 1", "MATEMATIKA 1"),
+
+
+  //   private int sks;
+  //   private boolean hasCourse;
+  //   ListCourses(int i, boolean b) {
+  //     sks = i;
+  //     hasCourse = b;
+  //   }
+  //   public void setCourse(boolean b) {
+  //     hasCourse = b;
+  //   }
+  //   public int getSks() {
+  //     return sks;
+  //   }
+  //   public boolean finishCourse() {
+  //     return hasCourse;
+  //   }
+  // }
+
   public Hud(Player p, int b) {
 
     player = p;
