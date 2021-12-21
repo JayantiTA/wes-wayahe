@@ -197,6 +197,10 @@ public class PlayState extends GameState {
     books.add(b);
     if(s.equals("DASPROG"))b.addChange(new int[]{31,17,1}); 
     if(s.equals("KIM"))b.addChange(new int[]{31,21,1}); 
+    if(s.equals("SISDIG")){
+      b.addChange(new int[]{27,7,1}); 
+      b.addChange(new int[]{28,7,1}); 
+    } 
     if(s.equals("PBO"))b.addChange(new int[]{72,2,6});
     if(s.equals("APSI"))b.addChange(new int[]{63,6,6});
     if(s.equals("PBKK")){
