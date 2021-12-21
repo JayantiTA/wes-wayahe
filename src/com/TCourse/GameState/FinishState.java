@@ -7,6 +7,7 @@ import com.TCourse.Main.GamePanel;
 import com.TCourse.Manager.Content;
 import com.TCourse.Manager.DataTime;
 import com.TCourse.Manager.GameStateManager;
+import com.TCourse.Manager.JukeBox;
 import com.TCourse.Manager.Keys;
 
 public class FinishState extends GameState {
@@ -64,6 +65,7 @@ public class FinishState extends GameState {
 	public void handleInput() {
 		if (Keys.isPressed(Keys.ENTER)) {
 			gsm.setState(GameStateManager.MENU);
+			JukeBox.play("collect_book");
 		}
 	}
 	

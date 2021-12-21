@@ -13,6 +13,7 @@ import com.TCourse.Main.GamePanel;
 import com.TCourse.Manager.Content;
 import com.TCourse.Manager.DataTime;
 import com.TCourse.Manager.GameStateManager;
+import com.TCourse.Manager.JukeBox;
 import com.TCourse.Manager.Keys;
 import com.TCourse.TileMap.TileMap;
 
@@ -78,6 +79,12 @@ public class PlayState extends GameState {
     tileMap.setPositionImmediately(-xSector * sectorSize, -ySector * sectorSize);
     
     hud = new Hud(player, 37);
+
+    // load sfx
+    JukeBox.load("/SFX/collect_book.mp3", "collect_book");
+    JukeBox.load("/SFX/collect_item.mp3", "collect_item");
+    JukeBox.load("/SFX/tilechange.mp3", "tilechange");
+		JukeBox.load("/SFX/water_splash.mp3", "splash");
 
     currentPage = -1;
     prevPage = -1;
@@ -281,6 +288,7 @@ public class PlayState extends GameState {
         }
         
         player.takeCourse(b.getCourseName());
+        JukeBox.play("collect_book");
         hud.alreadyTaken(b.getCourseName());
         books.remove(i);
         i--;
@@ -308,6 +316,9 @@ public class PlayState extends GameState {
         for (int[] j : ali) {
           tileMap.setTile(j[0], j[1], j[2]);
         }
+        if (ali.size() != 0) {
+					JukeBox.play("tilechange");
+				}
         
       }
 
@@ -328,6 +339,7 @@ public class PlayState extends GameState {
         items.remove(i);
         i--;
         item.collected(player);
+        JukeBox.play("collect_item");
         Sparkle s = new Sparkle(tileMap);
         s.setPosition(item.getX(), item.getY());
         sparkles.add(s);
