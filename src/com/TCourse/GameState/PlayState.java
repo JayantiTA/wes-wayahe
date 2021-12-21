@@ -75,7 +75,7 @@ public class PlayState extends GameState {
     
     player.setTilePosition(17, 17);
     player.setTotalCourses(28);
-    player.setTotalCredit(65);
+    player.setTotalCredit(75);
     
     sectorSize = GamePanel.WIDTH;
     xSector = player.getX() / sectorSize;
