@@ -27,30 +27,54 @@ public class Hud {
   private int semester;
   private int currentSemester;
   private String courseName;
+  private String[] names;
 
   private Font font;
   private Color textColor;
 
-  // public enum ListCourses {
-  //   MAT1("MAT 1", "MATEMATIKA 1"),
+  public enum ListCourses {
+    MAT1("MAT 1", "MATEMATIKA 1"),
+    FIS1("FIS 1", "FISIKA 1"),
+    KIM("KIM", "KIMIA DASAR"),
+    PANCASILA("PANCASILA", "PANCASILA"),
+    BIN("BIN", "BAHASA INDONESIA"),
+    DASPROG("DASPROG", "DASAR PEMROGRAMAN"),
+    MAT2("MAT 2", "MATEMATIKA 2"),
+    FIS2("FIS 2", "FISIKA 2"),
+    AGAMA("AGAMA", "AGAMA"),
+    KWN("KWN", "KEWARGANEGARAAN"),
+    BIG("BIG", "BAHASA INGGRIS"),
+    STRUKDAT("STRUKDAT", "STRUKTUR DATA"),
+    SISDIG("SISDIG", "SISTEM DIGITAL"),
+    MATDIS("MATDIS", "MATEMATIKA DISKRIT"),
+    ALIN("ALIN", "ALJABAR LINEAR"),
+    KOMNUM("KOMNUM", "KOMPUTASI NUMERIK"),
+    PBO("PBO", "PEMROGRAMAN BERORIENTASI OBJEK"),
+    ORKOM("ORKOM", "ORGANISASI KOMPUTER"),
+    SBD("SBD", "SISTEM BASIS DATA"),
+    PROBSTAT("PROBSTAT", "PROBABILITAS DAN STATISTIKA"),
+    PAA("PAA", "PERANCANGAN DAN ANALISIS ALGORITMA"),
+    APSI("APSI", "ANALISIS DAN PERANCANGAN SISTEM INFORMASI"),
+    KB("KB", "KECERDASAN BUATAN"),
+    MBD("MBD", "MANAJEMEN BASIS DATA"),
+    SISOP("SISOP", "SISTEM OPERASI"),
+    IMK("IMK", "INTERAKSI MANUSIA DAN KOMPUTER"),
+    TGO("TGO", "TEORI GRAF DAN OTOMATA"),
+    PBKK("PBKK", "PEMROGRAMAN BERBASIS KERANGKA KERJA");
 
-
-  //   private int sks;
-  //   private boolean hasCourse;
-  //   ListCourses(int i, boolean b) {
-  //     sks = i;
-  //     hasCourse = b;
-  //   }
-  //   public void setCourse(boolean b) {
-  //     hasCourse = b;
-  //   }
-  //   public int getSks() {
-  //     return sks;
-  //   }
-  //   public boolean finishCourse() {
-  //     return hasCourse;
-  //   }
-  // }
+    private String shortName;
+    private String fullName;
+    ListCourses(String a, String b) {
+      shortName= a;
+      fullName = b;
+    }
+    public static String getFullName(String s) {
+      for (ListCourses lc:ListCourses.values()) {
+        if (s.equals(lc.shortName)) return lc.fullName;
+      }
+      return null;
+    }
+  }
 
   public Hud(Player p, int b) {
 
@@ -117,7 +141,25 @@ public class Hud {
 
     countTicks++;
     if (countTicks <= 30 && player.numCourses() > 0) {
-      Content.drawString(g, courseName, 16, 16);
+      String stringName = ListCourses.getFullName(courseName);
+      if (stringName != null) {
+        int y = 16;
+        String delims = "\\s+";
+        for (int i = 0; i < stringName.length(); i++) {
+          names = stringName.split(delims);
+        }
+        for (int i = 0; i < names.length; i++) {
+          if ((i !=  names.length - 1) && (names[i].length() + names[i+1].length() < 12)) {
+            Content.drawString(g, names[i] + " " + names[i+1], 16, y);
+            i++;
+          }
+          else 
+            Content.drawString(g, names[i], 16, y);
+          y += 12;
+        }
+      }
+      else
+        Content.drawString(g, courseName, 16, 16);
     }
     
     countTicks2++;
