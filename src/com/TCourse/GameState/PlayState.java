@@ -82,7 +82,7 @@ public class PlayState extends GameState {
     ySector = player.getY() / sectorSize;
     tileMap.setPositionImmediately(-xSector * sectorSize, -ySector * sectorSize);
     
-    hud = new Hud(player, 37);
+    hud = new Hud(player, 39);
 
     // load music
     JukeBox.load("/Music/bgmusic_spring.mp3", "music_spring");

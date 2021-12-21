@@ -17,8 +17,8 @@ public class Book extends Entity {
 
   private String[] twoCredits = new String[] {"BIN", "PANCASILA", "BIG", "KWN", "AGAMA"};
   private String[] threeCredits = new String[] {"MAT 1", "KIM", "MAT 2", "FIS 2", "STRUKDAT", "SISDIG", "MATDIS", "ALIN", "KOMNUM", 
-                                  "PBO", "ORKOM", "PROBSTAT", "APSI", "KB", "SISOP", "IMK", "TGO", "PBKK"};
-  private String[] fourCredits = new String[] {"DASPROG", "FIS 1", "SBD", "PAA", "MBD"};
+                                  "PBO", "ORKOM", "PROBSTAT", "APSI", "KB", "MBD", "IMK", "TGO", "PBKK"};
+  private String[] fourCredits = new String[] {"DASPROG", "FIS 1", "SBD", "PAA", "SISOP"};
 
   private String[] specialCourse = new String[] {"MATDIS", "PAA", "PROBSTAT", "IMK", "TGO", "PBKK"};
   
