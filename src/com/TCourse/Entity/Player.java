@@ -224,19 +224,19 @@ public class Player extends Entity {
     if (hasAxe) {
       if (currentAnimation == UP && tileMap.getIndex(rowTile - 1, colTile) == 21) {
         tileMap.setTile(rowTile - 1, colTile, 1);
-				JukeBox.play("tilechange");
+				JukeBox.play("remove");
       }
       if (currentAnimation == DOWN && tileMap.getIndex(rowTile + 1, colTile) == 21) {
         tileMap.setTile(rowTile + 1, colTile, 1);
-				JukeBox.play("tilechange");
+				JukeBox.play("remove");
       }
       if (currentAnimation == LEFT && tileMap.getIndex(rowTile, colTile - 1) == 21) {
         tileMap.setTile(rowTile, colTile - 1, 1);
-				JukeBox.play("tilechange");
+				JukeBox.play("remove");
       }
       if (currentAnimation == RIGHT && tileMap.getIndex(rowTile, colTile + 1) == 21) {
         tileMap.setTile(rowTile, colTile + 1, 1);
-				JukeBox.play("tilechange");
+				JukeBox.play("remove");
       }
     }
 
@@ -259,40 +259,48 @@ public class Player extends Entity {
       if (currentAnimation == UP) {
         if (tileMap.getIndex(rowTile - 1, colTile) == 23) {
           tileMap.setTile(rowTile - 1, colTile, 1);
+  				JukeBox.play("open_door");
           hasKey = false;
         }
         else if (tileMap.getIndex(rowTile - 1, colTile) == 24) {
           tileMap.setTile(rowTile - 1, colTile, 6);
+  				JukeBox.play("open_door");
           hasKey = false;
         }
       }
       if (currentAnimation == DOWN) {
         if (tileMap.getIndex(rowTile + 1, colTile) == 23) {
           hasKey = false;
+  				JukeBox.play("open_door");
           tileMap.setTile(rowTile + 1, colTile, 1);
         }
         else if (tileMap.getIndex(rowTile + 1, colTile) == 24) {
           tileMap.setTile(rowTile + 1, colTile, 6);
+  				JukeBox.play("open_door");
           hasKey = false;
         }
       }
       if (currentAnimation == LEFT) {
         if (tileMap.getIndex(rowTile, colTile - 1) == 23) {
           tileMap.setTile(rowTile, colTile - 1, 1);
+  				JukeBox.play("open_door");
           hasKey = false;
         }
         else if (tileMap.getIndex(rowTile, colTile - 1) == 24) {
           tileMap.setTile(rowTile, colTile - 1, 6);
+  				JukeBox.play("open_door");
           hasKey = false;
         }
       }
       if (currentAnimation == RIGHT) {
         if (tileMap.getIndex(rowTile, colTile + 1) == 23) {
           tileMap.setTile(rowTile, colTile + 1, 1);
+  				JukeBox.play("open_door");
           hasKey = false;
         }
         else if (tileMap.getIndex(rowTile, colTile + 1) == 24) {
           tileMap.setTile(rowTile, colTile + 1, 6);
+  				JukeBox.play("open_door");
           hasKey = false;
         }
       }
