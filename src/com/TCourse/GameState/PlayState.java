@@ -293,18 +293,21 @@ public class PlayState extends GameState {
       if (player.intersects(b)) {
 
         if ((player.courseInSemester2(b.getCourseName()) || player.courseInSemester3(b.getCourseName()) || 
-          player.courseInSemester4(b.getCourseName())) && !player.passedSemester1()) {
+            player.courseInSemester4(b.getCourseName()) || player.courseInSemester6(b.getCourseName())) && 
+            !player.passedSemester1()) {
           hud.hasNotFinished(1);
           return;
         }
 
         if (!eligible(b.getCourseName()) && (player.courseInSemester3(b.getCourseName()) ||
-          player.courseInSemester4(b.getCourseName())) && !player.passedSemester2()) {
+            player.courseInSemester4(b.getCourseName()) || player.courseInSemester6(b.getCourseName())) &&
+            !player.passedSemester2()) {
           hud.hasNotFinished(2);
           return;
         }
 
-        if (!eligible(b.getCourseName()) && player.courseInSemester4(b.getCourseName()) && !player.passedSemester3()) {
+        if (!eligible(b.getCourseName()) && (player.courseInSemester4(b.getCourseName()) ||
+            player.courseInSemester6(b.getCourseName())) && !player.passedSemester3()) {
           hud.hasNotFinished(3);
           return;
         }
