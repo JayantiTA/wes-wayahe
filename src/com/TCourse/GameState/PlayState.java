@@ -201,6 +201,7 @@ public class PlayState extends GameState {
       b.addChange(new int[]{27,7,1}); 
       b.addChange(new int[]{28,7,1}); 
     } 
+    if(s.equals("ALIN"))b.addChange(new int[]{43,24,6});
     if(s.equals("PBO"))b.addChange(new int[]{72,2,6});
     if(s.equals("APSI"))b.addChange(new int[]{63,6,6});
     if(s.equals("PBKK")){
