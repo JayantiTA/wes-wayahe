@@ -15,10 +15,10 @@ public class Book extends Entity {
 
   private String courseName;
 
-  private String[] twoCredits = new String[] {"BIN", "PANCASILA", "BIG", "KWN"};
+  private String[] twoCredits = new String[] {"BIN", "PANCASILA", "BIG", "KWN", "AGAMA"};
   private String[] threeCredits = new String[] {"MAT 1", "KIM", "MAT 2", "FIS 2", "STRUKDAT", "SISDIG", "MATDIS", "ALIN", "KOMNUM", 
-                                  "PBO", "ORKOM", "PROBSTAT", "IMK", "TGO", "PBKK"};
-  private String[] fourCredits = new String[] {"DASPROG", "FIS 1", "SBD", "PAA"};
+                                  "PBO", "ORKOM", "PROBSTAT", "APSI", "KB", "SISOP", "IMK", "TGO", "PBKK"};
+  private String[] fourCredits = new String[] {"DASPROG", "FIS 1", "SBD", "PAA", "MBD"};
 
   private String[] specialCourse = new String[] {"MATDIS", "PAA", "PROBSTAT", "IMK", "TGO", "PBKK"};
   
