@@ -58,6 +58,7 @@ public class Player extends Entity {
   private boolean hasKey;
   private boolean onWater;
   private boolean wrongKey;
+  private boolean finish;
   private long ticks;
   
   public Player(TileMap tm) {
@@ -214,6 +215,7 @@ public class Player extends Entity {
   public boolean hasBoat() { return hasBoat; }
   public boolean hasKey() { return hasKey; }
   public boolean wrongKey() { return wrongKey; }
+  public boolean finish() { return finish; }
   
   public long getTicks() { return ticks; }
   
@@ -293,9 +295,9 @@ public class Player extends Entity {
       }
       if (currentAnimation == DOWN) {
         if (tileMap.getIndex(rowTile + 1, colTile) == 23) {
-          hasKey = false;
           JukeBox.play("open_gate");
           tileMap.setTile(rowTile + 1, colTile, 1);
+          hasKey = false;
         }
         else if (tileMap.getIndex(rowTile + 1, colTile) == 24) {
           tileMap.setTile(rowTile + 1, colTile, 6);
@@ -330,6 +332,11 @@ public class Player extends Entity {
         else if (tileMap.getIndex(rowTile, colTile + 1) == 24) {
           tileMap.setTile(rowTile, colTile + 1, 6);
           JukeBox.play("open_gate");
+          hasKey = false;
+        }
+        else if (tileMap.getIndex(rowTile, colTile + 1) == 27) {
+          JukeBox.play("open_gate");
+          finish = true;
           hasKey = false;
         }
         else if (tileMap.getIndex(rowTile, colTile + 1) == 34) {

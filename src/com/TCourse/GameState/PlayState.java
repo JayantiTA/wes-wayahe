@@ -39,6 +39,7 @@ public class PlayState extends GameState {
   private boolean eventStart;
   private boolean eventFinish;
   private boolean firstItem;
+  private boolean lastItem;
   private boolean updateItem;
   private boolean updateCredit;
   private boolean spring;
@@ -95,7 +96,7 @@ public class PlayState extends GameState {
     System.out.println("4");
 		JukeBox.setVolume("music_summer", -10);
     System.out.println("5");
-		JukeBox.load("/Music/finish.wav", "finish");
+		JukeBox.load("/Music/bgmusic_finish.mp3", "finish");
     System.out.println("6");
 		JukeBox.setVolume("finish", -10);
 
@@ -196,11 +197,14 @@ public class PlayState extends GameState {
     Item item;
 
     if (!firstItem) {
+      int x;
       item = new Item(tileMap);
       item.setType(Item.KEY);
-      item.setTilePosition(37, 35);
+      x = player.passedSemester4() ? 77 : 37;
+      item.setTilePosition(x, 35);
       items.add(item);
       updateItem = true;
+      lastItem = player.passedSemester4() ? true : false;
     }
     
     if (firstItem) {
@@ -275,6 +279,7 @@ public class PlayState extends GameState {
     if (eventStart) eventStart();
     if (eventFinish) eventFinish();
     if (player.passedSemester2() && !updateItem) populateItems();
+    if (player.passedSemester4() && !lastItem) populateItems();
     if (player.passedSemester2() && !updateCredit && player.hasKey()) {
       hud.setCreditUnit(player.getTotalCredit());
       updateCredit = true;
@@ -284,10 +289,12 @@ public class PlayState extends GameState {
       accel = false;
     }
     
-    if (player.currentCredit() == player.getTotalCredit()) {
-      eventFinish = blockInput = true;
-    }
-
+    // if (player.currentCredit() == player.getTotalCredit()) {
+    //   eventFinish = blockInput = true;
+    // }
+      if (player.finish()) {
+        eventFinish = blockInput = true;
+      }
     
     int oldX = xSector;
     int oldY = ySector;
