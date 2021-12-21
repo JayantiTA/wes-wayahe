@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import com.TCourse.Manager.Content;
 import com.TCourse.Manager.GameStateManager;
+import com.TCourse.Manager.JukeBox;
 import com.TCourse.Manager.Keys;
 
 public class MenuState extends GameState{
@@ -28,6 +29,8 @@ public class MenuState extends GameState{
     try {
       background = Content.MENUBG[0][0];
       book = Content.BOOK1[0][0];
+      JukeBox.load("/SFX/collect_book.mp3", "collect");
+      JukeBox.load("/SFX/menuoption.mp3", "menuoption");  
     }
     catch (Exception e) {
       e.printStackTrace();
@@ -52,12 +55,15 @@ public class MenuState extends GameState{
   
   public void handleInput() {
     if (Keys.isPressed(Keys.DOWN) && currentOption < options.length - 1) {
+			JukeBox.play("menuoption");
       currentOption++;
     }
     if (Keys.isPressed(Keys.UP) && currentOption > 0) {
+			JukeBox.play("menuoption");
       currentOption--;
     }
     if (Keys.isPressed(Keys.ENTER)) {
+			JukeBox.play("collect");
       selectOption();
     }
   }

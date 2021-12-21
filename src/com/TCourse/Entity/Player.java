@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import com.TCourse.Manager.Content;
+import com.TCourse.Manager.JukeBox;
 import com.TCourse.TileMap.TileMap;
 
 public class Player extends Entity {
@@ -223,15 +224,19 @@ public class Player extends Entity {
     if (hasAxe) {
       if (currentAnimation == UP && tileMap.getIndex(rowTile - 1, colTile) == 21) {
         tileMap.setTile(rowTile - 1, colTile, 1);
+				JukeBox.play("tilechange");
       }
       if (currentAnimation == DOWN && tileMap.getIndex(rowTile + 1, colTile) == 21) {
         tileMap.setTile(rowTile + 1, colTile, 1);
+				JukeBox.play("tilechange");
       }
       if (currentAnimation == LEFT && tileMap.getIndex(rowTile, colTile - 1) == 21) {
         tileMap.setTile(rowTile, colTile - 1, 1);
+				JukeBox.play("tilechange");
       }
       if (currentAnimation == RIGHT && tileMap.getIndex(rowTile, colTile + 1) == 21) {
         tileMap.setTile(rowTile, colTile + 1, 1);
+				JukeBox.play("tilechange");
       }
     }
 
@@ -309,6 +314,7 @@ public class Player extends Entity {
       onWater = false;
     }
     if (!current && onWater) {
+      JukeBox.play("splash");
     }
     
     if (down) {
