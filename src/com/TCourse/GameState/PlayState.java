@@ -41,6 +41,8 @@ public class PlayState extends GameState {
   private boolean firstItem;
   private boolean updateItem;
   private boolean updateCredit;
+  private boolean spring;
+  private boolean summer;
   private int eventTick;
   private int currentPage;
   private int prevPage;
@@ -66,6 +68,7 @@ public class PlayState extends GameState {
     firstItem = true;
     updateItem = false;
     updateCredit = false;
+    spring = true;
     populateBooks();
     populateItems();
     
@@ -80,13 +83,43 @@ public class PlayState extends GameState {
     
     hud = new Hud(player, 37);
 
+    // load music
+    JukeBox.load("/Music/bgmusic_spring.mp3", "music_spring");
+    System.out.println("1");
+		JukeBox.setVolume("music_spring", -10);
+    System.out.println("2");
+		JukeBox.loop("music_spring", 1000, 1000, JukeBox.getFrames("music_spring") - 1000);
+    System.out.println("3");
+    JukeBox.load("/Music/bgmusic_summer.mp3", "music_summer");
+    System.out.println("4");
+		JukeBox.setVolume("music_summer", -10);
+    System.out.println("5");
+		JukeBox.load("/Music/finish.wav", "finish");
+    System.out.println("6");
+		JukeBox.setVolume("finish", -10);
+
     // load sfx
+    System.out.println("7");
     JukeBox.load("/SFX/collect_book.mp3", "collect_book");
-    JukeBox.load("/SFX/collect_item.mp3", "collect_item");
-    JukeBox.load("/SFX/open_door.mp3", "open_door");
-    JukeBox.load("/SFX/remove.mp3", "remove");
-    JukeBox.load("/SFX/tilechange.mp3", "tilechange");
-		JukeBox.load("/SFX/water_splash.mp3", "splash");
+    System.out.println("8");
+    JukeBox.load("/SFX/collect_item(1).wav", "collect_item");
+    System.out.println("9");
+    JukeBox.load("/SFX/mapmove.wav", "mapmove");
+    System.out.println("10");
+    JukeBox.load("/SFX/splash.wav", "watersplash");
+    System.out.println("11");
+    JukeBox.load("/SFX/remove_wood.wav", "remove_wood");
+    System.out.println("12");
+    JukeBox.load("/SFX/remove_rock.wav", "remove_rock");
+    System.out.println("13");
+    JukeBox.load("/SFX/tilechange.mp3", "tilechanges");
+    System.out.println("14");
+    JukeBox.load("/SFX/open_gate.wav", "open_gate");
+    System.out.println("15");
+    JukeBox.load("/SFX/finish_semester.wav", "finish_semester");
+    System.out.println("16");
+    JukeBox.load("/SFX/press_key.wav", "press_key");
+    System.out.println("17");
 
     currentPage = -1;
     prevPage = -1;
@@ -201,12 +234,39 @@ public class PlayState extends GameState {
       return true;
     if ((s.equals("PROBSTAT") || s.equals("PAA")) && player.passedSemester2())
       return true;
+    if ((s.equals("IMK") || s.equals("PBKK") || s.equals("TGO")) && player.passedSemester3())
+      return true;
+    return false;
+  }
+
+  private boolean changeMusic() {
+    if (summer && !JukeBox.isPlaying("music_summer")) {
+      JukeBox.stop("music_spring");
+		  JukeBox.loop("music_summer", 1000, 1000, JukeBox.getFrames("music_summer") - 1000);
+      return true;
+    }
+    if (spring && !JukeBox.isPlaying("music_spring")) {
+      JukeBox.stop("music_summer");
+		  JukeBox.loop("music_spring", 1000, 1000, JukeBox.getFrames("music_spring") - 1000);
+      return true;
+    }
     return false;
   }
   
   public void update() {
     
     handleInput();
+
+    if (!player.inSpring()) {
+      spring = false;
+      summer = true;
+      if (changeMusic()) summer = false;
+    }
+    if (player.inSpring()) {
+      spring = true;
+      summer = false;
+      if (changeMusic()) spring = false;
+    }
     
     if (eventStart) eventStart();
     if (eventFinish) eventFinish();
@@ -220,10 +280,16 @@ public class PlayState extends GameState {
       eventFinish = blockInput = true;
     }
     
+    int oldX = xSector;
+    int oldY = ySector;
     xSector = player.getX() / sectorSize;
     ySector = player.getY() / sectorSize;
     tileMap.setPosition(-xSector * sectorSize, -ySector * sectorSize);
     tileMap.update();
+
+    if (oldX != xSector || oldY != ySector) {
+      JukeBox.play("mapmove");
+    }
     
     if (tileMap.isMoving()) return;
     
@@ -288,8 +354,8 @@ public class PlayState extends GameState {
           tileMap.setTile(j[0], j[1], j[2]);
         }
         if (ali.size() != 0) {
-					JukeBox.play("tilechange");
-				}
+          JukeBox.play("tilechanges");
+        }
         
       }
 
@@ -405,9 +471,11 @@ public class PlayState extends GameState {
   
   public void handleInput() {
     if (Keys.isPressed(Keys.ESCAPE)) {
+      JukeBox.play("press_key");
       gsm.setPaused(true);
     }
     if (Keys.isPressed(Keys.F2)) {
+      JukeBox.play("press_key");
       if (player.getCourseTaken().size() > 18 && prevPage == 2) currentPage = 3;
       else if (player.getCourseTaken().size() > 12 && prevPage == 1) currentPage = 2;
       else if (player.getCourseTaken().size() > 6 && prevPage == 0) currentPage = 1;
@@ -427,28 +495,28 @@ public class PlayState extends GameState {
   
   private void eventStart() {
     eventTick++;
-		if (eventTick == 1) {
-			boxes.clear();
-			for(int i = 0; i < 9; i++) {
-				boxes.add(new Rectangle(0, i * 16, GamePanel.WIDTH, 16));
-			}
-		}
-		if (eventTick > 1 && eventTick < 32) {
-			for(int i = 0; i < boxes.size(); i++) {
-				Rectangle r = boxes.get(i);
-				if(i % 2 == 0) {
-					r.x -= 4;
-				}
-				else {
-					r.x += 4;
-				}
-			}
-		}
-		if (eventTick == 33) {
-			boxes.clear();
-			eventStart = false;
-			eventTick = 0;
-		}
+    if (eventTick == 1) {
+      boxes.clear();
+      for(int i = 0; i < 9; i++) {
+        boxes.add(new Rectangle(0, i * 16, GamePanel.WIDTH, 16));
+      }
+    }
+    if (eventTick > 1 && eventTick < 32) {
+      for(int i = 0; i < boxes.size(); i++) {
+        Rectangle r = boxes.get(i);
+        if(i % 2 == 0) {
+          r.x -= 4;
+        }
+        else {
+          r.x += 4;
+        }
+      }
+    }
+    if (eventTick == 33) {
+      boxes.clear();
+      eventStart = false;
+      eventTick = 0;
+    }
   }
   
   private void eventFinish() {
@@ -459,6 +527,9 @@ public class PlayState extends GameState {
         if (i % 2 == 0) boxes.add(new Rectangle(-128, i * 16, GamePanel.WIDTH, 16));
         else boxes.add(new Rectangle(128, i * 16, GamePanel.WIDTH, 16));
       }
+      if (JukeBox.isPlaying("music_spring")) JukeBox.stop("music_spring");
+      if (JukeBox.isPlaying("music_summer")) JukeBox.stop("music_summer");
+      JukeBox.play("finish");
     }
     if (eventTick > 1) {
       for (int i = 0; i < boxes.size(); i++) {
@@ -472,7 +543,7 @@ public class PlayState extends GameState {
       }
     }
     if (eventTick > 33) {
-      if (eventFinish) {
+      if (!JukeBox.isPlaying("finish")) {
         DataTime.setTime(player.getTicks());
         gsm.setState(GameStateManager.FINISH);
       }

@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 
 import com.TCourse.Manager.Content;
 import com.TCourse.Manager.GameStateManager;
+import com.TCourse.Manager.JukeBox;
 import com.TCourse.Manager.Keys;
 
 public class PauseState extends GameState {
@@ -36,9 +37,11 @@ public class PauseState extends GameState {
   }
   public void handleInput() {
     if (Keys.isPressed(Keys.ESCAPE)) {
+      JukeBox.play("press_key");
       gsm.setPaused(false);
     }
     if (Keys.isPressed(Keys.F1)) {
+      JukeBox.play("press_key");
       gsm.setPaused(false);
       gsm.setState(GameStateManager.MENU);
     }

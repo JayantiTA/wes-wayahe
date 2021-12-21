@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import com.TCourse.Main.GamePanel;
 import com.TCourse.Manager.GameStateManager;
+import com.TCourse.Manager.JukeBox;
 import com.TCourse.Manager.Keys;
 
 public class IntroState extends GameState {
@@ -26,8 +27,11 @@ public class IntroState extends GameState {
   }
   
   public void init() {
+    JukeBox.load("/Music/introstate.wav", "intro");
+		JukeBox.setVolume("intro", -10);
     ticks = 0;
     try {
+      JukeBox.play("intro");
       logo = ImageIO.read(getClass().getResourceAsStream("/Logo/logo.gif"));
     }
     catch (Exception e) {
@@ -64,6 +68,7 @@ public class IntroState extends GameState {
   
   public void handleInput() {
     if (Keys.isPressed(Keys.ENTER)) {
+      JukeBox.stop("intro");
       gsm.setState(GameStateManager.MENU);
     }
   }

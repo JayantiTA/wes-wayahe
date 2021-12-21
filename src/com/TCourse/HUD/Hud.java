@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import com.TCourse.Entity.Player;
 import com.TCourse.Main.GamePanel;
 import com.TCourse.Manager.Content;
+import com.TCourse.Manager.JukeBox;
 
 public class Hud {
 
@@ -141,7 +142,7 @@ public class Hud {
 
     if (player.wrongKey()) {
       for (int i = 0; i < 90; i++) {
-        Content.drawString(g, "WRONG KEY!", 28, 16);
+        Content.drawString(g, "WRONG KEY", 28, 16);
       }
       player.setWrongKey();
     }
@@ -178,28 +179,33 @@ public class Hud {
       Content.drawString(g, "first", 44, 48);
     }
     
-    if (currentSemester == 4 && countTicks >= 55 && countTicks <= 100 && player.numCourses() > 12 && player.passedSemester3()) {
+    if (currentSemester == 4 && countTicks >= 50 && countTicks <= 90 && player.numCourses() > 18 && player.passedSemester4()) {
+      JukeBox.play("finish_semester");
       Content.drawString(g, "You have", 30, 16);
       Content.drawString(g, "finished", 30, 30);
       Content.drawString(g, "SEMESTER 4", 24, 44);
+      if (countTicks == 90) currentSemester = 5;
     }
-    else if (currentSemester == 3 && countTicks >= 55 && countTicks <= 100 && player.numCourses() > 12 && player.passedSemester3()) {
+    else if (currentSemester == 3 && countTicks >= 50 && countTicks <= 90 && player.numCourses() > 12 && player.passedSemester3()) {
+      JukeBox.play("finish_semester");
       Content.drawString(g, "You have", 30, 16);
       Content.drawString(g, "finished", 30, 30);
       Content.drawString(g, "SEMESTER 3", 24, 44);
-      if (countTicks == 105) currentSemester = 4;
+      if (countTicks == 90) currentSemester = 4;
     }
-    else if (currentSemester == 2 && countTicks >= 55 && countTicks <= 100 && player.numCourses() > 6 && player.passedSemester2()) {
+    else if (currentSemester == 2 && countTicks >= 50 && countTicks <= 90 && player.numCourses() > 6 && player.passedSemester2()) {
+      JukeBox.play("finish_semester");
       Content.drawString(g, "You have", 30, 16);
       Content.drawString(g, "finished", 30, 30);
       Content.drawString(g, "SEMESTER 2", 24, 44);
-      if (countTicks == 105) currentSemester = 3;
+      if (countTicks == 90) currentSemester = 3;
     }
-    else if (currentSemester == 1 && countTicks >= 55 && countTicks <= 100 && player.numCourses() > 0 && player.passedSemester1()) {
+    else if (currentSemester == 1 && countTicks >= 50 && countTicks <= 90 && player.numCourses() > 0 && player.passedSemester1()) {
+      JukeBox.play("finish_semester");
       Content.drawString(g, "You have", 30, 16);
       Content.drawString(g, "finished", 30, 30);
       Content.drawString(g, "SEMESTER 1", 24, 44);
-      if (countTicks == 105) currentSemester = 2;
+      if (countTicks == 90) currentSemester = 2;
     }
     
   }

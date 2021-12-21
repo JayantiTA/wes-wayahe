@@ -229,40 +229,49 @@ public class Player extends Entity {
   public void setUp() {
     super.setUp();
   }
+
+  public boolean inSpring() {
+    if (tileMap.getY() < 40) return true;
+    return false;
+  }
   
   public void setAction() {
 
     if (hasAxe) {
       if (currentAnimation == UP && tileMap.getIndex(rowTile - 1, colTile) == 21) {
         tileMap.setTile(rowTile - 1, colTile, 1);
-				JukeBox.play("remove");
+        JukeBox.play("remove_wood");
       }
       if (currentAnimation == DOWN && tileMap.getIndex(rowTile + 1, colTile) == 21) {
         tileMap.setTile(rowTile + 1, colTile, 1);
-				JukeBox.play("remove");
+        JukeBox.play("remove_wood");
       }
       if (currentAnimation == LEFT && tileMap.getIndex(rowTile, colTile - 1) == 21) {
         tileMap.setTile(rowTile, colTile - 1, 1);
-				JukeBox.play("remove");
+        JukeBox.play("remove_wood");
       }
       if (currentAnimation == RIGHT && tileMap.getIndex(rowTile, colTile + 1) == 21) {
         tileMap.setTile(rowTile, colTile + 1, 1);
-				JukeBox.play("remove");
+        JukeBox.play("remove_wood");
       }
     }
 
     if (hasPickaxe) {
       if (currentAnimation == UP && tileMap.getIndex(rowTile - 1, colTile) == 26) {
         tileMap.setTile(rowTile - 1, colTile, 6);
+        JukeBox.play("remove_rock");
       }
       if (currentAnimation == DOWN && tileMap.getIndex(rowTile + 1, colTile) == 26) {
         tileMap.setTile(rowTile + 1, colTile, 6);
+        JukeBox.play("remove_rock");
       }
       if (currentAnimation == LEFT && tileMap.getIndex(rowTile, colTile - 1) == 26) {
         tileMap.setTile(rowTile, colTile - 1, 6);
+        JukeBox.play("remove_rock");
       }
       if (currentAnimation == RIGHT && tileMap.getIndex(rowTile, colTile + 1) == 26) {
         tileMap.setTile(rowTile, colTile + 1, 6);
+        JukeBox.play("remove_rock");
       }
     }
 
@@ -270,12 +279,12 @@ public class Player extends Entity {
       if (currentAnimation == UP) {
         if (tileMap.getIndex(rowTile - 1, colTile) == 23) {
           tileMap.setTile(rowTile - 1, colTile, 1);
-  				JukeBox.play("open_door");
+          JukeBox.play("open_gate");
           hasKey = false;
         }
         else if (tileMap.getIndex(rowTile - 1, colTile) == 24) {
           tileMap.setTile(rowTile - 1, colTile, 6);
-  				JukeBox.play("open_door");
+          JukeBox.play("open_gate");
           hasKey = false;
         }
         else if (tileMap.getIndex(rowTile - 1, colTile) == 34) {
@@ -285,12 +294,12 @@ public class Player extends Entity {
       if (currentAnimation == DOWN) {
         if (tileMap.getIndex(rowTile + 1, colTile) == 23) {
           hasKey = false;
-  				JukeBox.play("open_door");
+          JukeBox.play("open_gate");
           tileMap.setTile(rowTile + 1, colTile, 1);
         }
         else if (tileMap.getIndex(rowTile + 1, colTile) == 24) {
           tileMap.setTile(rowTile + 1, colTile, 6);
-  				JukeBox.play("open_door");
+          JukeBox.play("open_gate");
           hasKey = false;
         }
         else if (tileMap.getIndex(rowTile + 1, colTile) == 34) {
@@ -300,12 +309,12 @@ public class Player extends Entity {
       if (currentAnimation == LEFT) {
         if (tileMap.getIndex(rowTile, colTile - 1) == 23) {
           tileMap.setTile(rowTile, colTile - 1, 1);
-  				JukeBox.play("open_door");
+          JukeBox.play("open_gate");
           hasKey = false;
         }
         else if (tileMap.getIndex(rowTile, colTile - 1) == 24) {
           tileMap.setTile(rowTile, colTile - 1, 6);
-  				JukeBox.play("open_door");
+          JukeBox.play("open_gate");
           hasKey = false;
         }
         else if (tileMap.getIndex(rowTile, colTile - 1) == 34) {
@@ -315,12 +324,12 @@ public class Player extends Entity {
       if (currentAnimation == RIGHT) {
         if (tileMap.getIndex(rowTile, colTile + 1) == 23) {
           tileMap.setTile(rowTile, colTile + 1, 1);
-  				JukeBox.play("open_door");
+          JukeBox.play("open_gate");
           hasKey = false;
         }
         else if (tileMap.getIndex(rowTile, colTile + 1) == 24) {
           tileMap.setTile(rowTile, colTile + 1, 6);
-  				JukeBox.play("open_door");
+          JukeBox.play("open_gate");
           hasKey = false;
         }
         else if (tileMap.getIndex(rowTile, colTile + 1) == 34) {
@@ -345,7 +354,7 @@ public class Player extends Entity {
       onWater = false;
     }
     if (!current && onWater) {
-      JukeBox.play("splash");
+      JukeBox.play("watersplash");
     }
     
     if (down) {
