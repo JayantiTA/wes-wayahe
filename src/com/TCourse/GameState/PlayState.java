@@ -98,35 +98,41 @@ public class PlayState extends GameState {
   }
 
   private void populateBooks() {
-    
-    insertBook("DASPROG", 19, 20);
-    insertBook("MAT 1", 19, 21);
-    insertBook("FIS 1", 19, 19);
-    insertBook("KIM", 19, 18);
-    insertBook("BIN", 19, 17);
-    insertBook("PANCASILA", 19, 22);
-    insertBook("STRUKDAT", 20, 20);
-    insertBook("SISDIG", 20, 21);
-    insertBook("FIS 2", 20, 19);
-    insertBook("MAT 2", 20, 18);
-    insertBook("BIG", 20, 17);
-    insertBook("AGAMA", 20, 22);
-    insertBook("KWN", 21, 21);
-    insertBook("MATDIS", 21, 17);
-    insertBook("ALIN", 21, 20);
-    insertBook("KOMNUM", 21, 19);
-    insertBook("ORKOM", 21, 18);
-    insertBook("PBO", 21, 22);
-    insertBook("SBD", 22, 21);
-    insertBook("PROBSTAT", 22, 22);
-    insertBook("PAA", 22, 20);
-    // insertBook("APSI", 21, 19);
-    // insertBook("KB", 21, 18);
-    // insertBook("MBD", 21, 17);
-    // insertBook("SISOP", 21, 21);
-    // insertBook("IMK", 21, 22);
-    // insertBook("TGO", 22, 20);
-    // insertBook("PBKK", 22, 21);
+    // Semester 1
+    insertBook("DASPROG", 29, 13);
+    insertBook("MAT 1", 27, 26);
+    insertBook("FIS 1", 30, 33);
+    insertBook("KIM", 14, 25);
+    insertBook("BIN", 13, 35);
+    insertBook("PANCASILA", 36, 3);
+    // Semester 2
+    insertBook("STRUKDAT", 35, 26);
+    insertBook("SISDIG", 26, 3);
+    insertBook("FIS 2", 3, 3);
+    insertBook("MAT 2", 9, 14);
+    insertBook("BIG", 3, 33);
+    insertBook("AGAMA", 12, 20);
+    insertBook("KWN", 3, 23);
+    // Semester 2 Akselerasi
+    insertBook("MATDIS", 20, 14);
+    // Semester 3
+    insertBook("ALIN", 41, 25);
+    insertBook("KOMNUM", 49, 30);
+    insertBook("ORKOM", 69, 29);
+    insertBook("PBO", 77, 1);
+    insertBook("SBD", 75, 9);
+    // Semester 3 Akselerasi
+    insertBook("PROBSTAT", 70, 9);
+    insertBook("PAA", 75, 28);
+    // Semester 4
+    insertBook("APSI", 69, 6);
+    insertBook("KB", 59, 1);
+    insertBook("MBD", 43, 10);
+    insertBook("SISOP", 66, 37);
+    // Semester 4 Akselerasi
+    insertBook("IMK", 40, 38);
+    insertBook("TGO", 43, 16);
+    insertBook("PBKK", 51, 8);
 
     // b = new Book(tileMap, "DASPROG");
     // b.setTilePosition(20, 20);
@@ -189,6 +195,16 @@ public class PlayState extends GameState {
     Book b = new Book(tileMap, s);
     b.setTilePosition(y, x);
     books.add(b);
+    if(s.equals("DASPROG"))b.addChange(new int[]{31,17,1}); 
+    if(s.equals("KIM"))b.addChange(new int[]{31,21,1}); 
+    if(s.equals("PBO"))b.addChange(new int[]{72,2,6});
+    if(s.equals("APSI"))b.addChange(new int[]{63,6,6});
+    if(s.equals("PBKK")){
+      b.addChange(new int[]{47,3,6});
+      b.addChange(new int[]{48,3,6});
+    }
+    
+    
   }
   
   private void populateItems() {
@@ -207,22 +223,22 @@ public class PlayState extends GameState {
 
       item = new Item(tileMap);
       item.setType(Item.AXE);
-      item.setTilePosition(22, 17);
+      item.setTilePosition(26, 37);
       items.add(item);
       
       item = new Item(tileMap);
       item.setType(Item.BOAT);
-      item.setTilePosition(17, 22);
+      item.setTilePosition(12, 4);
       items.add(item);
   
       item = new Item(tileMap);
       item.setType(Item.PICKAXE);
-      item.setTilePosition(17, 22);
+      item.setTilePosition(60, 23);
       items.add(item);
   
       item = new Item(tileMap);
       item.setType(Item.KEY);
-      item.setTilePosition(22, 18);
+      item.setTilePosition(20, 22);
       items.add(item);
 
       firstItem = false;
