@@ -238,7 +238,7 @@ public class PlayState extends GameState {
   
       item = new Item(tileMap);
       item.setType(Item.PICKAXE);
-      item.setTilePosition(60, 23);
+      item.setTilePosition(60, 21);
       items.add(item);
   
       item = new Item(tileMap);
