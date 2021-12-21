@@ -140,7 +140,7 @@ public class Hud {
     }
 
     countTicks++;
-    if (countTicks <= 30 && player.numCourses() > 0) {
+    if (countTicks <= 50 && player.numCourses() > 0) {
       String stringName = ListCourses.getFullName(courseName);
       if (stringName != null) {
         int y = 16;
@@ -153,8 +153,10 @@ public class Hud {
             Content.drawString(g, names[i] + " " + names[i+1], 16, y);
             i++;
           }
-          else 
-            Content.drawString(g, names[i], 16, y);
+          else {
+            if (names[i].equals("KEWARGANEGARAAN")) Content.drawString(g, names[i], 5, y);
+            else Content.drawString(g, names[i], 16, y);
+          }
           y += 12;
         }
       }

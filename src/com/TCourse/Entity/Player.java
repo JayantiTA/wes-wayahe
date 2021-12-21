@@ -34,6 +34,7 @@ public class Player extends Entity {
   private String[] semester2 = new String[] {"BIG", "KWN", "MAT 2", "FIS 2", "AGAMA", "STRUKDAT", "SISDIG"};
   private String[] semester3 = new String[] {"ALIN", "KOMNUM", "ORKOM", "PBO", "SBD", "MATDIS"};
   private String[] semester4 = new String[] {"PAA", "PROBSTAT", "APSI", "KB", "MBD", "SISOP"};
+  private String[] semester6 = new String[] {"TGO", "PBKK", "IMK"};
 
   private String[] twoCredits = new String[] {"BIN", "PANCASILA", "BIG", "KWN", "AGAMA"};
   private String[] threeCredits = new String[] {"MAT 1", "KIM", "MAT 2", "FIS 2", "STRUKDAT", "SISDIG", "MATDIS", "ALIN", "KOMNUM", 
@@ -125,6 +126,13 @@ public class Player extends Entity {
   public boolean courseInSemester4(String s) {
     for (int i = 0; i < semester4.length; i++) {
       if (s.equals(semester4[i])) return true;
+    }
+    return false;
+  }
+
+  public boolean courseInSemester6(String s) {
+    for (int i = 0; i < semester6.length; i++) {
+      if (s.equals(semester6[i])) return true;
     }
     return false;
   }
