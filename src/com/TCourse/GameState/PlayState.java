@@ -43,6 +43,7 @@ public class PlayState extends GameState {
   private boolean updateCredit;
   private boolean spring;
   private boolean summer;
+  private boolean accel;
   private int eventTick;
   private int currentPage;
   private int prevPage;
@@ -73,7 +74,7 @@ public class PlayState extends GameState {
     populateItems();
     
     player.setTilePosition(17, 17);
-    player.setTotalCourses(20);
+    player.setTotalCourses(28);
     player.setTotalCredit(65);
     
     sectorSize = GamePanel.WIDTH;
@@ -236,6 +237,7 @@ public class PlayState extends GameState {
       return true;
     if ((s.equals("IMK") || s.equals("PBKK") || s.equals("TGO")) && player.passedSemester3()) {
       player.setTotalCredit(player.getTotalCredit() + 3);
+      accel = true;
       return true;
     }
     return false;
@@ -277,10 +279,15 @@ public class PlayState extends GameState {
       hud.setCreditUnit(player.getTotalCredit());
       updateCredit = true;
     }
+    if (accel) {
+      hud.setCreditUnit(player.getTotalCredit());
+      accel = false;
+    }
     
     if (player.currentCredit() == player.getTotalCredit()) {
       eventFinish = blockInput = true;
     }
+
     
     int oldX = xSector;
     int oldY = ySector;
@@ -327,6 +334,8 @@ public class PlayState extends GameState {
         }
         
         player.takeCourse(b.getCourseName());
+        // if (b.getCourseName().equals("IMK")) 
+        //   player.setTotalCredit(player.getTotalCredit() + 3);
         JukeBox.play("collect_book");
         hud.alreadyTaken(b.getCourseName());
         books.remove(i);
