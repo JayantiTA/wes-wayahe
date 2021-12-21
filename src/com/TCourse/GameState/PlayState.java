@@ -74,7 +74,7 @@ public class PlayState extends GameState {
     
     player.setTilePosition(17, 17);
     player.setTotalCourses(20);
-    player.setTotalCredit(75);
+    player.setTotalCredit(65);
     
     sectorSize = GamePanel.WIDTH;
     xSector = player.getX() / sectorSize;
@@ -234,8 +234,10 @@ public class PlayState extends GameState {
       return true;
     if ((s.equals("PROBSTAT") || s.equals("PAA")) && player.passedSemester2())
       return true;
-    if ((s.equals("IMK") || s.equals("PBKK") || s.equals("TGO")) && player.passedSemester3())
+    if ((s.equals("IMK") || s.equals("PBKK") || s.equals("TGO")) && player.passedSemester3()) {
+      player.setTotalCredit(player.getTotalCredit() + 3);
       return true;
+    }
     return false;
   }
 
@@ -272,7 +274,7 @@ public class PlayState extends GameState {
     if (eventFinish) eventFinish();
     if (player.passedSemester2() && !updateItem) populateItems();
     if (player.passedSemester2() && !updateCredit && player.hasKey()) {
-      hud.setCreditUnit(75);
+      hud.setCreditUnit(player.getTotalCredit());
       updateCredit = true;
     }
     
