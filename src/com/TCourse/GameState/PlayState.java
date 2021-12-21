@@ -83,6 +83,8 @@ public class PlayState extends GameState {
     // load sfx
     JukeBox.load("/SFX/collect_book.mp3", "collect_book");
     JukeBox.load("/SFX/collect_item.mp3", "collect_item");
+    JukeBox.load("/SFX/open_door.mp3", "open_door");
+    JukeBox.load("/SFX/remove.mp3", "remove");
     JukeBox.load("/SFX/tilechange.mp3", "tilechange");
 		JukeBox.load("/SFX/water_splash.mp3", "splash");
 
