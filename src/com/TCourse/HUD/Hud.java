@@ -178,23 +178,28 @@ public class Hud {
       Content.drawString(g, "first", 44, 48);
     }
     
-    if (currentSemester == 4 && countTicks >= 50 && countTicks <= 80 && player.numCourses() > 12 && player.passedSemester3()) {
-      Content.drawString(g, "You have passed", 4, 16);
-      Content.drawString(g, "SEMESTER 4", 24, 32);
+    if (currentSemester == 4 && countTicks >= 55 && countTicks <= 100 && player.numCourses() > 12 && player.passedSemester3()) {
+      Content.drawString(g, "You have", 30, 16);
+      Content.drawString(g, "finished", 30, 30);
+      Content.drawString(g, "SEMESTER 4", 24, 44);
     }
-    else if (currentSemester == 3 && countTicks >= 50 && countTicks <= 80 && player.numCourses() > 12 && player.passedSemester3()) {
-      Content.drawString(g, "You have passed", 4, 16);
-      Content.drawString(g, "SEMESTER 3", 24, 32);
+    else if (currentSemester == 3 && countTicks >= 55 && countTicks <= 100 && player.numCourses() > 12 && player.passedSemester3()) {
+      Content.drawString(g, "You have", 30, 16);
+      Content.drawString(g, "finished", 30, 30);
+      Content.drawString(g, "SEMESTER 3", 24, 44);
+      if (countTicks == 105) currentSemester = 4;
     }
-    else if (currentSemester == 2 && countTicks >= 50 && countTicks <= 80 && player.numCourses() > 6 && player.passedSemester2()) {
-      Content.drawString(g, "You have passed", 4, 16);
-      Content.drawString(g, "SEMESTER 2", 24, 32);
-      if (countTicks == 70) currentSemester = 3;
+    else if (currentSemester == 2 && countTicks >= 55 && countTicks <= 100 && player.numCourses() > 6 && player.passedSemester2()) {
+      Content.drawString(g, "You have", 30, 16);
+      Content.drawString(g, "finished", 30, 30);
+      Content.drawString(g, "SEMESTER 2", 24, 44);
+      if (countTicks == 105) currentSemester = 3;
     }
-    else if (countTicks >= 50 && countTicks <= 80 && player.numCourses() > 0 && player.passedSemester1() && currentSemester == 1) {
-      Content.drawString(g, "You have passed", 4, 16);
-      Content.drawString(g, "SEMESTER 1", 24, 32);
-      if (countTicks == 70) currentSemester = 2;
+    else if (currentSemester == 1 && countTicks >= 55 && countTicks <= 100 && player.numCourses() > 0 && player.passedSemester1()) {
+      Content.drawString(g, "You have", 30, 16);
+      Content.drawString(g, "finished", 30, 30);
+      Content.drawString(g, "SEMESTER 1", 24, 44);
+      if (countTicks == 105) currentSemester = 2;
     }
     
   }
