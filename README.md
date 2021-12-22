@@ -1,6 +1,5 @@
-## Getting Started
-
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## WES WAYAHE || TCourse
+TCourse merupakan sebuah permainan yang dibuat berdasarkan kondisi mahasiswa baru Teknik Informatika ITS yang memiliki minim pengetahuan terhadap mata kuliah apa saja yang akan diambil jurusan Teknik Informatika ITS. TCourse dapat membantu mahasiswa memahami roadmap mata kuliah khususnya pemahaman terkait urutan pengambilan mata kuliah dimulai dari semester awal supaya lebih mengenal hal-hal yang akan dipelajari di jurusan.
 
 ## Folder Structure
 
