@@ -44,7 +44,6 @@ public class Player extends Entity {
                                   "PBO", "ORKOM", "PROBSTAT", "APSI", "KB", "MBD", "IMK", "TGO", "PBKK"};
   private String[] fourCredits = new String[] {"DASPROG", "FIS 1", "SBD", "PAA", "SISOP"};
 
-  
   // gameplay
   private int numCourses;
   private int tempCredit;
@@ -375,6 +374,7 @@ public class Player extends Entity {
     else {
       onWater = false;
     }
+    
     // if moving from land to water
     if (!current && onWater) {
       JukeBox.play("watersplash");
