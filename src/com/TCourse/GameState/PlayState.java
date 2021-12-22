@@ -1,3 +1,6 @@
+// Main program for playing GameState
+// Contains update and draw objects
+// also condition program for some features
 package com.TCourse.GameState;
 
 import java.awt.Graphics2D;
@@ -19,36 +22,49 @@ import com.TCourse.TileMap.TileMap;
 
 public class PlayState extends GameState {
   
+  // player
   private Player player;
   
+  // tilemap
   private TileMap tileMap;
   
+  // books
   private ArrayList<Book> books;
 
+  // items
   private ArrayList<Item> items;
   
+
+  // sparkles
   private ArrayList<Sparkle> sparkles;
   
+  // camera position
   private int xSector;
   private int ySector;
   private int sectorSize; 
   
+  // hud
   private Hud hud;
   
+  // events
   private boolean blockInput;
   private boolean eventStart;
   private boolean eventFinish;
+  private int eventTick;
+
+  // condition variables
   private boolean firstItem;
   private boolean lastItem;
   private boolean updateItem;
   private boolean updateCredit;
   private boolean spring;
   private boolean summer;
-  private boolean accel;
-  private int eventTick;
+
+  // pages to display course taken
   private int currentPage;
   private int prevPage;
   
+  // transition box
   private ArrayList<Rectangle> boxes;
   
   public PlayState(GameStateManager gsm) {
@@ -57,26 +73,34 @@ public class PlayState extends GameState {
   
   public void init() {
     
+    // create list
     books = new ArrayList<Book>();
     sparkles = new ArrayList<Sparkle>();
     items = new ArrayList<Item>();
     
+    // load map
     tileMap = new TileMap(16);
     tileMap.loadTiles("/Tilesets/tilesets.gif");
     tileMap.loadMap("/Maps/testtileset.map");
     
+    // create player
     player = new Player(tileMap);
     
+    // initialize variables
     firstItem = true;
     lastItem = false;
     updateItem = false;
     updateCredit = false;
     spring = true;
     summer = false;
-    accel = false;
+    currentPage = -1;
+    prevPage = -1;
+
+    // initialize position of books and items
     populateBooks();
     populateItems();
     
+    // initialize player
     player.setTilePosition(17, 17);
     player.setTotalCourses(28);
     player.setTotalCredit(75);
@@ -86,55 +110,40 @@ public class PlayState extends GameState {
     ySector = player.getY() / sectorSize;
     tileMap.setPositionImmediately(-xSector * sectorSize, -ySector * sectorSize);
     
+    // load hud
+    // 39 is total credit semester 1 till semester 2 + matdis
     hud = new Hud(player, 39);
 
     // load music
     JukeBox.load("/Music/bgmusic_spring.mp3", "music_spring");
-    System.out.println("1");
     JukeBox.setVolume("music_spring", -10);
-    System.out.println("2");
     JukeBox.loop("music_spring", 1000, 1000, JukeBox.getFrames("music_spring") - 1000);
-    System.out.println("3");
     JukeBox.load("/Music/bgmusic_summer.mp3", "music_summer");
-    System.out.println("4");
     JukeBox.setVolume("music_summer", -10);
-    System.out.println("5");
     JukeBox.load("/Music/bgmusic_finish.mp3", "finish");
-    System.out.println("6");
     JukeBox.setVolume("finish", -10);
 
     // load sfx
-    System.out.println("7");
     JukeBox.load("/SFX/collect_book.mp3", "collect_book");
-    System.out.println("8");
     JukeBox.load("/SFX/collect_item(1).wav", "collect_item");
-    System.out.println("9");
     JukeBox.load("/SFX/mapmove.wav", "mapmove");
-    System.out.println("10");
     JukeBox.load("/SFX/splash.wav", "watersplash");
-    System.out.println("11");
     JukeBox.load("/SFX/remove_wood.wav", "remove_wood");
-    System.out.println("12");
     JukeBox.load("/SFX/remove_rock.wav", "remove_rock");
-    System.out.println("13");
     JukeBox.load("/SFX/tilechange.mp3", "tilechanges");
-    System.out.println("14");
     JukeBox.load("/SFX/open_gate.wav", "open_gate");
-    System.out.println("15");
     JukeBox.load("/SFX/finish_semester.wav", "finish_semester");
-    System.out.println("16");
     JukeBox.load("/SFX/press_key.wav", "press_key");
-    System.out.println("17");
 
-    currentPage = -1;
-    prevPage = -1;
     
+    // start event
     boxes = new ArrayList<Rectangle>();
     eventStart = true;
     eventStart();
       
   }
 
+  // function to set position of books
   private void populateBooks() {
     // Semester 1
     insertBook("DASPROG", 29, 13);
@@ -174,20 +183,22 @@ public class PlayState extends GameState {
 
   }
 
+  // function to create book objects
   private void insertBook(String s, int y, int x) {
     Book b = new Book(tileMap, s);
     b.setTilePosition(y, x);
     books.add(b);
-    if(s.equals("DASPROG"))b.addChange(new int[]{31,17,1}); 
-    if(s.equals("KIM"))b.addChange(new int[]{31,21,1}); 
-    if(s.equals("SISDIG")){
+    // condition to change blocked tilemap to unblocked map
+    if (s.equals("DASPROG")) b.addChange(new int[]{31,17,1}); 
+    if (s.equals("KIM")) b.addChange(new int[]{31,21,1}); 
+    if (s.equals("SISDIG")) {
       b.addChange(new int[]{27,7,1}); 
       b.addChange(new int[]{28,7,1}); 
     } 
-    if(s.equals("ALIN"))b.addChange(new int[]{43,24,6});
-    if(s.equals("PBO"))b.addChange(new int[]{72,2,6});
-    if(s.equals("APSI"))b.addChange(new int[]{63,6,6});
-    if(s.equals("PBKK")){
+    if (s.equals("ALIN")) b.addChange(new int[]{43,24,6});
+    if (s.equals("PBO")) b.addChange(new int[]{72,2,6});
+    if (s.equals("APSI")) b.addChange(new int[]{63,6,6});
+    if (s.equals("PBKK")) {
       b.addChange(new int[]{47,3,6});
       b.addChange(new int[]{48,3,6});
     }
@@ -195,10 +206,12 @@ public class PlayState extends GameState {
     
   }
   
+  // function to set position of items
   private void populateItems() {
     
     Item item;
 
+    // condition for summer's key and autumn's key
     if (!firstItem) {
       int x;
       item = new Item(tileMap);
@@ -210,6 +223,7 @@ public class PlayState extends GameState {
       lastItem = player.passedSemester4() ? true : false;
     }
     
+    // condition for spring's key and another items
     if (firstItem) {
 
       item = new Item(tileMap);
@@ -237,19 +251,15 @@ public class PlayState extends GameState {
     
   }
 
+  // function to check eligible or not to take next semester's course
   private boolean eligible(String s) {
-    if (s.equals("MATDIS") && player.passedSemester1())
-      return true;
-    if ((s.equals("PROBSTAT") || s.equals("PAA")) && player.passedSemester2())
-      return true;
-    if ((s.equals("IMK") || s.equals("PBKK") || s.equals("TGO")) && player.passedSemester3()) {
-      // player.setTotalCredit(player.getTotalCredit() + 3);
-      // accel = true;
-      return true;
-    }
+    if (s.equals("MATDIS") && player.passedSemester1()) return true;
+    if ((s.equals("PROBSTAT") || s.equals("PAA")) && player.passedSemester2()) return true;
+    if ((s.equals("IMK") || s.equals("PBKK") || s.equals("TGO")) && player.passedSemester3()) return true;
     return false;
   }
 
+  // function to change music from summer's music to spring's music (and vice versa)
   private boolean changeMusic() {
     if (summer && !JukeBox.isPlaying("music_summer")) {
       JukeBox.stop("music_spring");
@@ -266,8 +276,10 @@ public class PlayState extends GameState {
   
   public void update() {
     
+    // check keys input
     handleInput();
 
+    // check current mussic that is playing
     if (!player.inSpring()) {
       spring = false;
       summer = true;
@@ -279,27 +291,23 @@ public class PlayState extends GameState {
       if (changeMusic()) spring = false;
     }
     
+    // check events
     if (eventStart) eventStart();
     if (eventFinish) eventFinish();
+    if (player.finish()) {
+      eventFinish = blockInput = true;
+    }
+
+    // add summer's key after semester 2 and autumn's key after semester 4
     if (player.passedSemester2() && !updateItem) populateItems();
     if (player.passedSemester4() && !lastItem) populateItems();
+    // update total credit unit in hud after semester 2
     if (player.passedSemester2() && !updateCredit && player.hasKey()) {
       hud.setCreditUnit(player.getTotalCredit());
       updateCredit = true;
     }
-    // if (accel) {
-    //   hud.setCreditUnit(player.getTotalCredit());
-    //   accel = false;
-    // }
     
-    // if (player.currentCredit() == player.getTotalCredit()) {
-    //   eventFinish = blockInput = true;
-    // }
-    System.out.println(player.finish());
-    if (player.finish()) {
-      eventFinish = blockInput = true;
-    }
-    
+    // update camera
     int oldX = xSector;
     int oldY = ySector;
     xSector = player.getX() / sectorSize;
@@ -313,17 +321,22 @@ public class PlayState extends GameState {
     
     if (tileMap.isMoving()) return;
     
+    // update player
     player.update();
     
+    // update books
     for (int i = 0; i < books.size(); i++) {
       
       Book b = books.get(i);
       b.update();
-
+      
+      // initialize variable to check credit
       boolean hasFound = false;
       
+      // player take course/collect book
       if (player.intersects(b)) {
 
+        // if still in semester 1 and try to take next semester's course
         if ((player.courseInSemester2(b.getCourseName()) || player.courseInSemester3(b.getCourseName()) || 
             player.courseInSemester4(b.getCourseName()) || player.courseInSemester6(b.getCourseName())) && 
             !player.passedSemester1()) {
@@ -331,6 +344,8 @@ public class PlayState extends GameState {
           return;
         }
 
+        // if still in semester 2 and try to take next semester's course 
+        // and the course is not eligible
         if (!eligible(b.getCourseName()) && (player.courseInSemester3(b.getCourseName()) ||
             player.courseInSemester4(b.getCourseName()) || player.courseInSemester6(b.getCourseName())) &&
             !player.passedSemester2()) {
@@ -338,29 +353,31 @@ public class PlayState extends GameState {
           return;
         }
 
+        // if still in semester 3 and try to take next semester's course 
+        // and the course is not eligible
         if (!eligible(b.getCourseName()) && (player.courseInSemester4(b.getCourseName()) ||
             player.courseInSemester6(b.getCourseName())) && !player.passedSemester3()) {
           hud.hasNotFinished(3);
           return;
         }
 
+        // update total credit from optional semester 6's courses that taken in semester 4
         if (eligible(b.getCourseName()) && player.passedSemester3()) {
           player.setTotalCredit(player.getTotalCredit() + 3);
           hud.setCreditUnit(player.getTotalCredit());
         }
         
+        // player take the course
         player.takeCourse(b.getCourseName());
-        // if (b.getCourseName().equals("IMK")) 
-        //   player.setTotalCredit(player.getTotalCredit() + 3);
-        // if ((b.getCourseName().equals("IMK") || b.getCourseName().equals("PBKK") || b.getCourseName().equals("TGO"))) {
-        //   player.setTotalCredit(player.getTotalCredit() + 3);
-        //   hud.setCreditUnit(player.getTotalCredit());
-        // }
+        // collect book sound
         JukeBox.play("collect_book");
+        // update course taken in hud
         hud.alreadyTaken(b.getCourseName());
+        // remove from list
         books.remove(i);
         i--;
         
+        // add credit of the course taken to currentCredit
         if (!hasFound) {
           if (b.twoCredits()) {
             player.collectedCourse(2);
@@ -376,10 +393,12 @@ public class PlayState extends GameState {
           }
         }
         
+        // add new sparkle
         Sparkle s = new Sparkle(tileMap);
         s.setPosition(b.getX(), b.getY());
         sparkles.add(s);
         
+        // make changes to tilemap
         ArrayList<int[]> ali = b.getChanges();
         for (int[] j : ali) {
           tileMap.setTile(j[0], j[1], j[2]);
@@ -392,6 +411,7 @@ public class PlayState extends GameState {
 
     }
     
+    // update sparkles
     for (int i = 0; i < sparkles.size(); i++) {
       Sparkle s = sparkles.get(i);
       s.update();
@@ -401,6 +421,7 @@ public class PlayState extends GameState {
       }
     }
     
+    // update items
     for (int i = 0; i < items.size(); i++) {
       Item item = items.get(i);
       if (player.intersects(item)) {
@@ -418,24 +439,31 @@ public class PlayState extends GameState {
   
   public void draw(Graphics2D g) {
     
+    // draw tilemap
     tileMap.draw(g);
     
+    // draw player
     player.draw(g);
     
+    // draw books
     for (Book b : books) {
       b.draw(g);
     }
     
+    // draw sparkles
     for (Sparkle s : sparkles) {
       s.draw(g);
     }
     
+    // draw items
     for (Item i : items) {
       i.draw(g);
     }
     
+    // draw hud
     hud.draw(g);
     
+    // draw list of courses taken
     if (currentPage == 0 && player.getCourseTaken().size() > 0) {
       int positionX = 16;
       int positionY = 16;
@@ -507,6 +535,7 @@ public class PlayState extends GameState {
       }
     }
 
+    // drawt transition box
     g.setColor(java.awt.Color.BLACK);
     for (int i = 0; i < boxes.size(); i++) {
       g.fill(boxes.get(i));
