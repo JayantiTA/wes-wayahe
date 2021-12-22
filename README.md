@@ -61,6 +61,11 @@ Workspace berisi dua folder secara default dimana:
 
 ![image](https://user-images.githubusercontent.com/85748069/147034032-495a314c-7d3f-4e73-8a31-e02a0d1199de.png)
 
+> Finish game beserta predikat kelulusan
+
+![image](https://user-images.githubusercontent.com/85748069/147035504-049d9da9-a7a4-4c61-89d7-e73b218b912a.png)
+
+
 ## Mekanisme Permainan
 
 > Menggunakan tanda panah ↑ → ↓ ← untuk bergerak ke atas, kanan, bawah dan kiri.
