@@ -124,13 +124,13 @@ public class PlayState extends GameState {
     JukeBox.setVolume("finish", -10);
 
     // load sfx
-    JukeBox.load("/SFX/collect_book.mp3", "collect_book");
-    JukeBox.load("/SFX/collect_item(1).wav", "collect_item");
+    JukeBox.load("/SFX/collect_book.wav", "collect_book");
+    JukeBox.load("/SFX/collect_item.wav", "collect_item");
     JukeBox.load("/SFX/mapmove.wav", "mapmove");
     JukeBox.load("/SFX/splash.wav", "watersplash");
     JukeBox.load("/SFX/remove_wood.wav", "remove_wood");
     JukeBox.load("/SFX/remove_rock.wav", "remove_rock");
-    JukeBox.load("/SFX/tilechange.mp3", "tilechanges");
+    JukeBox.load("/SFX/tilechange.wav", "tilechanges");
     JukeBox.load("/SFX/open_gate.wav", "open_gate");
     JukeBox.load("/SFX/finish_semester.wav", "finish_semester");
     JukeBox.load("/SFX/press_key.wav", "press_key");
