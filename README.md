@@ -26,6 +26,26 @@ Sementara itu, file output yang dikompilasi akan dibuat di folder `bin` secara d
 
 > Jika Anda ingin menyesuaikan struktur folder, buka `.vscode/settings.json` dan perbarui pengaturan terkait di sana.
 
+## Fitur Game
+> Main menu
+![image](https://user-images.githubusercontent.com/85748069/147033211-7f58463f-063f-4f00-8be7-c26e43ccff4e.png)
+> Pengambilan item
+![image](https://user-images.githubusercontent.com/85748069/147033337-8ec0d27c-454f-4a95-b000-6659b8d52832.png)
+> Penggantian tile map dengan item 
+![image](https://user-images.githubusercontent.com/85748069/147033375-21bbb10f-f2cd-47e3-a838-8477c6bb1cb2.png)
+> Penambahan SKS
+![image](https://user-images.githubusercontent.com/85748069/147033528-0d4d0654-4a85-48ab-8470-28c52d888259.png)
+> Pencegahan pengambilan mata kuliah lompat semester
+![image](https://user-images.githubusercontent.com/85748069/147033647-d1f0aff5-9277-4968-897b-1ccfa2c1ec0f.png)
+> Penggunaan kapal di tile air
+![image](https://user-images.githubusercontent.com/85748069/147033753-92fe6dae-7640-472b-a4fd-ff05c021a37d.png)
+> Buku warna berbeda untuk mata kuliah akselerasi
+![image](https://user-images.githubusercontent.com/85748069/147033994-6166ef7b-bcfc-4c74-8aec-73587e236e70.png)
+> Menu untuk mengecek mata kuliah apa saja yang sudah diambil beserta sksnya
+![image](https://user-images.githubusercontent.com/85748069/147034032-495a314c-7d3f-4e73-8a31-e02a0d1199de.png)
+
+
+
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
