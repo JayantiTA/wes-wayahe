@@ -105,7 +105,7 @@ public class PlayState extends GameState {
 
     // load sfx
     System.out.println("7");
-    JukeBox.load("/SFX/collect_book.mp3", "collect_book");
+    JukeBox.load("/SFX/collect_book.wav", "collect_book");
     System.out.println("8");
     JukeBox.load("/SFX/collect_item.wav", "collect_item");
     System.out.println("9");
@@ -117,7 +117,7 @@ public class PlayState extends GameState {
     System.out.println("12");
     JukeBox.load("/SFX/remove_rock.wav", "remove_rock");
     System.out.println("13");
-    JukeBox.load("/SFX/tilechange.mp3", "tilechanges");
+    JukeBox.load("/SFX/tilechange.wav", "tilechanges");
     System.out.println("14");
     JukeBox.load("/SFX/open_gate.wav", "open_gate");
     System.out.println("15");
