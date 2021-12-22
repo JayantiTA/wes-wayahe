@@ -23,9 +23,6 @@ public class Content {
     BufferedImage[][] ret;
     try {
       BufferedImage spritesheet = ImageIO.read(Content.class.getResourceAsStream(s));
-      System.out.println(s);
-      System.out.println(spritesheet.getWidth());
-      System.out.println(spritesheet.getHeight());
       int width = spritesheet.getWidth() / w;
       int height = spritesheet.getHeight() / h;
       ret = new BufferedImage[height][width];
