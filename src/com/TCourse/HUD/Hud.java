@@ -197,28 +197,28 @@ public class Hud {
     }
     
     // draw when player has just finished a certain semester
-    if (currentSemester == 4 && countTicks >= 50 && countTicks <= 90 && player.numCourses() > 18 && player. finishedSemester4()) {
+    if (currentSemester == 4 && countTicks >= 50 && countTicks <= 90 && player.numCourses() > 18 && player.finishedSemester4()) {
       JukeBox.play("finish_semester");
       Content.drawString(g, "You have", 30, 16);
       Content.drawString(g, "finished", 30, 30);
       Content.drawString(g, "SEMESTER 4", 24, 44);
       if (countTicks == 90) currentSemester = 5;
     }
-    else if (currentSemester == 3 && countTicks >= 50 && countTicks <= 90 && player.numCourses() > 12 && player. finishedSemester3()) {
+    else if (currentSemester == 3 && countTicks >= 50 && countTicks <= 90 && player.numCourses() > 12 && player.finishedSemester3()) {
       JukeBox.play("finish_semester");
       Content.drawString(g, "You have", 30, 16);
       Content.drawString(g, "finished", 30, 30);
       Content.drawString(g, "SEMESTER 3", 24, 44);
       if (countTicks == 90) currentSemester = 4;
     }
-    else if (currentSemester == 2 && countTicks >= 50 && countTicks <= 90 && player.numCourses() > 6 && player. finishedSemester2()) {
+    else if (currentSemester == 2 && countTicks >= 50 && countTicks <= 90 && player.numCourses() > 6 && player.finishedSemester2()) {
       JukeBox.play("finish_semester");
       Content.drawString(g, "You have", 30, 16);
       Content.drawString(g, "finished", 30, 30);
       Content.drawString(g, "SEMESTER 2", 24, 44);
       if (countTicks == 90) currentSemester = 3;
     }
-    else if (currentSemester == 1 && countTicks >= 50 && countTicks <= 90 && player.numCourses() > 0 && player. finishedSemester1()) {
+    else if (currentSemester == 1 && countTicks >= 50 && countTicks <= 90 && player.numCourses() > 0 && player.finishedSemester1()) {
       JukeBox.play("finish_semester");
       Content.drawString(g, "You have", 30, 16);
       Content.drawString(g, "finished", 30, 30);

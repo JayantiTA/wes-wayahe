@@ -216,11 +216,11 @@ public class PlayState extends GameState {
       int x;
       item = new Item(tileMap);
       item.setType(Item.KEY);
-      x = player. finishedSemester4() ? 77 : 37;
+      x = player.finishedSemester4() ? 77 : 37;
       item.setTilePosition(x, 35);
       items.add(item);
       updateItem = true;
-      lastItem = player. finishedSemester4() ? true : false;
+      lastItem = player.finishedSemester4() ? true : false;
     }
     
     // condition for spring's key and another items
@@ -253,9 +253,9 @@ public class PlayState extends GameState {
 
   // function to check eligible or not to take next semester's course
   private boolean eligible(String s) {
-    if (s.equals("MATDIS") && player. finishedSemester1()) return true;
-    if ((s.equals("PROBSTAT") || s.equals("PAA")) && player. finishedSemester2()) return true;
-    if ((s.equals("IMK") || s.equals("PBKK") || s.equals("TGO")) && player. finishedSemester3()) return true;
+    if (s.equals("MATDIS") && player.finishedSemester1()) return true;
+    if ((s.equals("PROBSTAT") || s.equals("PAA")) && player.finishedSemester2()) return true;
+    if ((s.equals("IMK") || s.equals("PBKK") || s.equals("TGO")) && player.finishedSemester3()) return true;
     return false;
   }
 
@@ -299,10 +299,10 @@ public class PlayState extends GameState {
     }
 
     // add summer's key after semester 2 and autumn's key after semester 4
-    if (player. finishedSemester2() && !updateItem) populateItems();
-    if (player. finishedSemester4() && !lastItem) populateItems();
+    if (player.finishedSemester2() && !updateItem) populateItems();
+    if (player.finishedSemester4() && !lastItem) populateItems();
     // update total credit unit in hud after semester 2
-    if (player. finishedSemester2() && !updateCredit && player.hasKey()) {
+    if (player.finishedSemester2() && !updateCredit && player.hasKey()) {
       hud.setCreditUnit(player.getTotalCredit());
       updateCredit = true;
     }
@@ -339,7 +339,7 @@ public class PlayState extends GameState {
         // if still in semester 1 and try to take next semester's course
         if ((player.courseInSemester2(b.getCourseName()) || player.courseInSemester3(b.getCourseName()) || 
             player.courseInSemester4(b.getCourseName()) || player.courseInSemester6(b.getCourseName())) && 
-            !player. finishedSemester1()) {
+            !player.finishedSemester1()) {
           hud.hasNotFinished(1);
           return;
         }
@@ -348,7 +348,7 @@ public class PlayState extends GameState {
         // and the course is not eligible
         if (!eligible(b.getCourseName()) && (player.courseInSemester3(b.getCourseName()) ||
             player.courseInSemester4(b.getCourseName()) || player.courseInSemester6(b.getCourseName())) &&
-            !player. finishedSemester2()) {
+            !player.finishedSemester2()) {
           hud.hasNotFinished(2);
           return;
         }
@@ -356,13 +356,13 @@ public class PlayState extends GameState {
         // if still in semester 3 and try to take next semester's course 
         // and the course is not eligible
         if (!eligible(b.getCourseName()) && (player.courseInSemester4(b.getCourseName()) ||
-            player.courseInSemester6(b.getCourseName())) && !player. finishedSemester3()) {
+            player.courseInSemester6(b.getCourseName())) && !player.finishedSemester3()) {
           hud.hasNotFinished(3);
           return;
         }
 
         // update total credit from optional semester 6's courses that taken in semester 4
-        if (eligible(b.getCourseName()) && player. finishedSemester3()) {
+        if (eligible(b.getCourseName()) && player.finishedSemester3()) {
           player.setTotalCredit(player.getTotalCredit() + 3);
           hud.setCreditUnit(player.getTotalCredit());
         }

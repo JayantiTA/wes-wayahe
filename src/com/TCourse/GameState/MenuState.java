@@ -30,8 +30,8 @@ public class MenuState extends GameState{
     try {
       background = Content.MENUBG[0][0];
       book = Content.BOOK1[0][0];
-      JukeBox.load("/SFX/collect_book.mp3", "collect");
-      JukeBox.load("/SFX/menuoption.mp3", "menuoption");  
+      JukeBox.load("/SFX/collect_book.wav", "collect");
+      JukeBox.load("/SFX/menuoption.wav", "menuoption");  
       JukeBox.load("/Music/bgmusic_menu.mp3", "music_menu");
       JukeBox.setVolume("music_menu", -10);
       JukeBox.loop("music_menu", 1000, 1000, JukeBox.getFrames("music_menu") - 1000);
