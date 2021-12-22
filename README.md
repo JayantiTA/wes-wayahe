@@ -57,6 +57,11 @@ Workspace berisi dua folder secara default dimana:
 
 ![image](https://user-images.githubusercontent.com/85748069/147033994-6166ef7b-bcfc-4c74-8aec-73587e236e70.png)
 
+> Pause menu dengan tombol esc
+
+![image](https://user-images.githubusercontent.com/85748069/147042512-b54281fb-a1ae-475d-b768-082089f53c45.png)
+
+
 > Menu untuk mengecek mata kuliah apa saja yang sudah diambil beserta sksnya
 
 ![image](https://user-images.githubusercontent.com/85748069/147034032-495a314c-7d3f-4e73-8a31-e02a0d1199de.png)
