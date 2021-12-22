@@ -107,7 +107,7 @@ public class PlayState extends GameState {
     System.out.println("7");
     JukeBox.load("/SFX/collect_book.mp3", "collect_book");
     System.out.println("8");
-    JukeBox.load("/SFX/collect_item(1).wav", "collect_item");
+    JukeBox.load("/SFX/collect_item.wav", "collect_item");
     System.out.println("9");
     JukeBox.load("/SFX/mapmove.wav", "mapmove");
     System.out.println("10");
