@@ -57,9 +57,37 @@ Workspace berisi dua folder secara default dimana:
 
 ![image](https://user-images.githubusercontent.com/85748069/147033994-6166ef7b-bcfc-4c74-8aec-73587e236e70.png)
 
+> Pause menu dengan tombol esc
+
+![image](https://user-images.githubusercontent.com/85748069/147042512-b54281fb-a1ae-475d-b768-082089f53c45.png)
+
+
 > Menu untuk mengecek mata kuliah apa saja yang sudah diambil beserta sksnya
 
 ![image](https://user-images.githubusercontent.com/85748069/147034032-495a314c-7d3f-4e73-8a31-e02a0d1199de.png)
+
+> Finish game beserta predikat kelulusan
+
+![image](https://user-images.githubusercontent.com/85748069/147035504-049d9da9-a7a4-4c61-89d7-e73b218b912a.png)
+
+
+## Mekanisme Permainan
+
+> Menggunakan tanda panah ↑ → ↓ ← untuk bergerak ke atas, kanan, bawah dan kiri.
+
+![image](https://user-images.githubusercontent.com/85748069/147034580-f4b460f1-2024-4b4b-bc20-e45a5879530b.png)
+
+> Menggunakan tanda spasi untuk berinteraksi dengan obstacle 
+
+![image](https://user-images.githubusercontent.com/85748069/147034830-c228a2f1-3208-4bc5-afbd-84fc17d1b74b.png)
+
+> Menggunakan tanda f2 untuk membuka menu yang berisi mata kuliah apa saja yang sudah diambil beserta jumlah SKSnya
+
+![image](https://user-images.githubusercontent.com/85748069/147034893-7724c70a-acdd-449b-8ef9-8a77dba5ac44.png)
+
+
+
+
 
 ## Dependency Management
 
