@@ -1,3 +1,6 @@
+// Contains array of current and previous key state
+// all GameStates have handleInput() method
+// to keep all keyboard input operations
 package com.TCourse.Manager;
 
 import java.awt.event.KeyEvent;

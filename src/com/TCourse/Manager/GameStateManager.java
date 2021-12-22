@@ -1,3 +1,4 @@
+// Contains list of GameStates
 package com.TCourse.Manager;
 
 import java.awt.Graphics2D;

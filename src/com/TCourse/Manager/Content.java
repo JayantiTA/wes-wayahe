@@ -1,3 +1,4 @@
+// Loads and splits all sprites into array2D
 package com.TCourse.Manager;
 
 import java.awt.Graphics2D;

@@ -1,3 +1,4 @@
+// Loads tilesets and 2d array tilemap
 package com.TCourse.TileMap;
 
 import java.awt.Graphics2D;
@@ -81,7 +82,7 @@ public class TileMap {
       }
       
     }
-    catch(Exception e) {
+    catch (Exception e) {
       e.printStackTrace();
     }
     

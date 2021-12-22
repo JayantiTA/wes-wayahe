@@ -1,3 +1,5 @@
+// Entry point of the game
+// loads up JFrame window and puts GamePanel into it
 package com.TCourse.Main;
 
 import javax.swing.JFrame;

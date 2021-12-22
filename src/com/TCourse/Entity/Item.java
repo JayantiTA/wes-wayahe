@@ -1,3 +1,5 @@
+// There are 3 types of items:
+// axe, pickaxe, boat, and key
 package com.TCourse.Entity;
 
 import java.awt.Graphics2D;

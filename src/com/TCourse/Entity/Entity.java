@@ -1,3 +1,5 @@
+// Super class of all game objects
+// has all logic to move around a tile map based
 package com.TCourse.Entity;
 
 import java.awt.Graphics2D;
@@ -99,6 +101,8 @@ public abstract class Entity {
     return new Rectangle(x, y, cWidth, cHeight);
   }
   
+  // check if player can move or not
+  // into the next position
   public boolean validateNextPosition() {
     
     if (moving) return true;
@@ -143,7 +147,7 @@ public abstract class Entity {
     
   }
   
-  // Calculates the destination coordinates.
+  // calculates the destination coordinates.
   public void getNextPosition() {
     
     if (left && x > xDest) x -= moveSpeed;

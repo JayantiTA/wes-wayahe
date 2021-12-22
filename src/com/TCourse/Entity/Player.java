@@ -1,3 +1,5 @@
+// Contains all the gameplay associated with
+// the Player.
 package com.TCourse.Entity;
 
 import java.awt.Graphics2D;
@@ -30,12 +32,13 @@ public class Player extends Entity {
   private final int RIGHTBOAT = 6;
   private final int UPBOAT = 7;
 
+  // list of courses based on their semester
   private String[] semester1 = new String[] {"BIN", "PANCASILA", "MAT 1", "FIS 1", "KIM", "DASPROG"};
   private String[] semester2 = new String[] {"BIG", "KWN", "MAT 2", "FIS 2", "AGAMA", "STRUKDAT", "SISDIG"};
   private String[] semester3 = new String[] {"ALIN", "KOMNUM", "ORKOM", "PBO", "SBD", "MATDIS"};
   private String[] semester4 = new String[] {"PAA", "PROBSTAT", "APSI", "KB", "MBD", "SISOP"};
   private String[] semester6 = new String[] {"TGO", "PBKK", "IMK"};
-
+  // list of courses based on their credit
   private String[] twoCredits = new String[] {"BIN", "PANCASILA", "BIG", "KWN", "AGAMA"};
   private String[] threeCredits = new String[] {"MAT 1", "KIM", "MAT 2", "FIS 2", "STRUKDAT", "SISDIG", "MATDIS", "ALIN", "KOMNUM", 
                                   "PBO", "ORKOM", "PROBSTAT", "APSI", "KB", "MBD", "IMK", "TGO", "PBKK"};
@@ -43,15 +46,11 @@ public class Player extends Entity {
 
   
   // gameplay
-  private int numDiamonds;
-  private int totalDiamonds;
-
   private int numCourses;
   private int tempCredit;
   private int totalCourses;
   private int totalCredit;
-  private ArrayList<String> courseTaken;
-
+  private long ticks;
   private boolean hasAxe;
   private boolean hasPickaxe;
   private boolean hasBoat;
@@ -59,7 +58,7 @@ public class Player extends Entity {
   private boolean onWater;
   private boolean wrongKey;
   private boolean finish;
-  private long ticks;
+  private ArrayList<String> courseTaken;
   
   public Player(TileMap tm) {
     
@@ -71,8 +70,7 @@ public class Player extends Entity {
     cHeight = 12;
     
     moveSpeed = 2;
-    
-    numDiamonds = 0;
+
     numCourses = 0;
     courseTaken = new ArrayList<String>();
     
@@ -96,11 +94,7 @@ public class Player extends Entity {
     animation.setDelay(d);
   }
   
-  public void collectedDiamond() { numDiamonds++; }
-  public int numDiamonds() { return numDiamonds; }
-  public int getTotalDiamonds() { return totalDiamonds; }
-  public void setTotalDiamonds(int i) { totalDiamonds = i; }
-  
+  // methods for courses
   public void collectedCourse(int i) { numCourses++; tempCredit += i;}
   public int numCourses() { return numCourses; }
   public int currentCredit() { return tempCredit; }
@@ -111,27 +105,25 @@ public class Player extends Entity {
   public void setTotalCredit(int i) { totalCredit = i; }
   public void takeCourse(String s) { courseTaken.add(s); }
 
+  // used to check course's semester
   public boolean courseInSemester2(String s) {
     for (int i = 0; i < semester2.length; i++) {
       if (s.equals(semester2[i])) return true;
     }
     return false;
   }
-
   public boolean courseInSemester3(String s) {
     for (int i = 0; i < semester3.length; i++) {
       if (s.equals(semester3[i])) return true;
     }
     return false;
   }
-  
   public boolean courseInSemester4(String s) {
     for (int i = 0; i < semester4.length; i++) {
       if (s.equals(semester4[i])) return true;
     }
     return false;
   }
-
   public boolean courseInSemester6(String s) {
     for (int i = 0; i < semester6.length; i++) {
       if (s.equals(semester6[i])) return true;
@@ -139,20 +131,19 @@ public class Player extends Entity {
     return false;
   }
   
+  // used to check course's credit
   public boolean isTwoCredits(String s) {
     for (int i = 0; i < twoCredits.length; i++) {
       if (s.equals(twoCredits[i])) return true;
     }
     return false;
   }
-
   public boolean isThreeCredits(String s) {
     for (int i = 0; i < threeCredits.length; i++) {
       if (s.equals(threeCredits[i])) return true;
     }
     return false;
   }
-
   public boolean isFourCredits(String s) {
     for (int i = 0; i < fourCredits.length; i++) {
       if (s.equals(fourCredits[i])) return true;
@@ -160,7 +151,8 @@ public class Player extends Entity {
     return false;
   }
 
-  public boolean passedSemester1() {
+  // used to check player has finished a certain semester
+  public boolean finishedSemester1() {
     if (numCourses == 0) return false;
     int check = 0;
     for (int i = 0; i < semester1.length; i++) {
@@ -171,8 +163,7 @@ public class Player extends Entity {
     }
     return false;
   }
-
-  public boolean passedSemester2() {
+  public boolean finishedSemester2() {
     int check = 0;
     for (int i = 0; i < semester2.length; i++) {
       for (int j = 0; j < courseTaken.size(); j++) {
@@ -182,8 +173,7 @@ public class Player extends Entity {
     }
     return false;
   }
-
-  public boolean passedSemester3() {
+  public boolean finishedSemester3() {
     int check = 0;
     for (int i = 0; i < semester3.length; i++) {
       for (int j = 0; j < courseTaken.size(); j++) {
@@ -193,8 +183,7 @@ public class Player extends Entity {
     }
     return false;
   }
-
-  public boolean passedSemester4() {
+  public boolean finishedSemester4() {
     int check = 0;
     for (int i = 0; i < semester4.length; i++) {
       for (int j = 0; j < courseTaken.size(); j++) {
@@ -205,6 +194,7 @@ public class Player extends Entity {
     return false;
   }
   
+  // methods for items
   public void gotAxe() { hasAxe = true; }
   public void gotPickaxe() { hasPickaxe = true; }
   public void gotBoat() { hasBoat = true; tileMap.replace(22, 4); }
@@ -215,10 +205,14 @@ public class Player extends Entity {
   public boolean hasBoat() { return hasBoat; }
   public boolean hasKey() { return hasKey; }
   public boolean wrongKey() { return wrongKey; }
+
+  // used to check if player has finished the game
   public boolean finish() { return finish; }
   
+  // used to update time
   public long getTicks() { return ticks; }
   
+  // keyboard input to move the player
   public void setDown() {
     super.setDown();
   }
@@ -232,13 +226,15 @@ public class Player extends Entity {
     super.setUp();
   }
 
+  // used to check if player in spring mode
   public boolean inSpring() {
     if (tileMap.getIndex(rowTile, colTile) < 6) return true;
     return false;
   }
   
   public void setAction() {
-
+    // if player has axe, cutable trees in front
+    // of the Player will be chopped down.
     if (hasAxe) {
       if (currentAnimation == UP && tileMap.getIndex(rowTile - 1, colTile) == 21) {
         tileMap.setTile(rowTile - 1, colTile, 1);
@@ -257,7 +253,9 @@ public class Player extends Entity {
         JukeBox.play("remove_wood");
       }
     }
-
+    
+    // if player has pickaxe, destroyable rocks in front
+    // of the Player will be removed.
     if (hasPickaxe) {
       if (currentAnimation == UP && tileMap.getIndex(rowTile - 1, colTile) == 26) {
         tileMap.setTile(rowTile - 1, colTile, 6);
@@ -277,6 +275,8 @@ public class Player extends Entity {
       }
     }
 
+    // key just can be used one time
+    // if open autumn's gate the game will finish
     if (hasKey) {
       if (currentAnimation == UP) {
         if (tileMap.getIndex(rowTile - 1, colTile) == 23) {
@@ -366,19 +366,21 @@ public class Player extends Entity {
     
     ticks++;
     
+    // check if on water
     boolean current = onWater;
     int positionNow = tileMap.getIndex(yDest / tileSize, xDest / tileSize);
-    
     if (positionNow == 4 || positionNow == 9 || positionNow == 10) {
       onWater = true;
     }
     else {
       onWater = false;
     }
+    // if moving from land to water
     if (!current && onWater) {
       JukeBox.play("watersplash");
     }
-    
+
+    // set animation
     if (down) {
       if (onWater && currentAnimation != DOWNBOAT) {
         setAnimation(DOWNBOAT, downBoatSprites, 10);
@@ -412,10 +414,12 @@ public class Player extends Entity {
       }
     }
     
+    // update position
     super.update();
     
   }
   
+  // draw player
   public void draw(Graphics2D g) {
     super.draw(g);
   }

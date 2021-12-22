@@ -1,3 +1,5 @@
+// This class will be activated 
+// when method setPaused(true) in GameStateManager
 package com.TCourse.GameState;
 
 import java.awt.Graphics2D;
@@ -33,6 +35,10 @@ public class PauseState extends GameState {
     Content.drawString(g, "F1:", 36, 92);
     Content.drawString(g, "return", 68, 88);
     Content.drawString(g, "to menu", 68, 96);
+
+    Content.drawString(g, "F2:", 36, 112);
+    Content.drawString(g, "course", 68, 108);
+    Content.drawString(g, "taken", 68, 116);
     
   }
   public void handleInput() {

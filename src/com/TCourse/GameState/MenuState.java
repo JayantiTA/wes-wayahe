@@ -1,3 +1,4 @@
+// MenuState before playing the game
 package com.TCourse.GameState;
 
 import java.awt.Graphics2D;

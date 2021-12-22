@@ -1,3 +1,6 @@
+// Takes in array of images
+// calling getImage() gives you the appropriate
+// image in the animation cycle.
 package com.TCourse.Entity;
 
 import java.awt.image.BufferedImage;

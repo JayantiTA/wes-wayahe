@@ -1,3 +1,4 @@
+// Plays animation once after collecting books and items
 package com.TCourse.Entity;
 
 import java.awt.Graphics2D;

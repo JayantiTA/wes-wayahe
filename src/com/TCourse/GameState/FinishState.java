@@ -1,3 +1,9 @@
+// State when finish the game yeay!
+// under 5 minutes: summa cumlaude
+// under 6 minutes: magna cumlaude
+// under 7 minutes: cumlaude
+// For 8 minutes or greater: high merit
+
 package com.TCourse.GameState;
 
 import java.awt.Color;

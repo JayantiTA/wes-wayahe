@@ -1,3 +1,4 @@
+// Intro that displays logo Java
 package com.TCourse.GameState;
 
 import java.awt.Color;

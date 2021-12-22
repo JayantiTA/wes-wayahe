@@ -1,3 +1,4 @@
+// Records the time when play the game
 package com.TCourse.Manager;
 
 public class DataTime {
