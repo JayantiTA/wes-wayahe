@@ -28,7 +28,7 @@ public class IntroState extends GameState {
   
   public void init() {
     JukeBox.load("/Music/introstate.wav", "intro");
-		JukeBox.setVolume("intro", -10);
+    JukeBox.setVolume("intro", -10);
     ticks = 0;
     try {
       JukeBox.play("intro");

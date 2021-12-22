@@ -198,7 +198,7 @@ public class Player extends Entity {
     int check = 0;
     for (int i = 0; i < semester4.length; i++) {
       for (int j = 0; j < courseTaken.size(); j++) {
-        if (semester3[i].equals(courseTaken.get(j))) check++;
+        if (semester4[i].equals(courseTaken.get(j))) check++;
         if (check == semester4.length) return true;
       }
     }
@@ -289,12 +289,17 @@ public class Player extends Entity {
           JukeBox.play("open_gate");
           hasKey = false;
         }
+        else if (tileMap.getIndex(rowTile - 1, colTile) == 29) {
+          JukeBox.play("open_gate");
+          finish = true;
+          hasKey = false;
+        }
         else if (tileMap.getIndex(rowTile - 1, colTile) == 34) {
           wrongKey = true;
         }
       }
       if (currentAnimation == DOWN) {
-        if (tileMap.getIndex(rowTile + 1, colTile) == 23) {
+        if (tileMap.getIndex(rowTile + 1, colTile) == 23) {;
           JukeBox.play("open_gate");
           tileMap.setTile(rowTile + 1, colTile, 1);
           hasKey = false;
@@ -302,6 +307,11 @@ public class Player extends Entity {
         else if (tileMap.getIndex(rowTile + 1, colTile) == 24) {
           tileMap.setTile(rowTile + 1, colTile, 6);
           JukeBox.play("open_gate");
+          hasKey = false;
+        }
+        else if (tileMap.getIndex(rowTile + 1, colTile) == 29) {
+          JukeBox.play("open_gate");
+          finish = true;
           hasKey = false;
         }
         else if (tileMap.getIndex(rowTile + 1, colTile) == 34) {
@@ -319,6 +329,11 @@ public class Player extends Entity {
           JukeBox.play("open_gate");
           hasKey = false;
         }
+        else if (tileMap.getIndex(rowTile, colTile - 1) == 29) {
+          JukeBox.play("open_gate");
+          finish = true;
+          hasKey = false;
+        }
         else if (tileMap.getIndex(rowTile, colTile - 1) == 34) {
           wrongKey = true;
         }
@@ -334,7 +349,7 @@ public class Player extends Entity {
           JukeBox.play("open_gate");
           hasKey = false;
         }
-        else if (tileMap.getIndex(rowTile, colTile + 1) == 27) {
+        else if (tileMap.getIndex(rowTile, colTile + 1) == 29) {
           JukeBox.play("open_gate");
           finish = true;
           hasKey = false;

@@ -24,9 +24,9 @@ public class FinishState extends GameState {
   public void init() {
     color = new Color(164, 198, 222);
     ticks = DataTime.getTime();
-    if (ticks < 3600) rank = 1;
-    else if (ticks < 5400) rank = 2;
-    else if (ticks < 7200) rank = 3;
+    if (ticks < 9000) rank = 1;
+    else if (ticks < 10800) rank = 2;
+    else if (ticks < 12600) rank = 3;
     else rank = 4;
   }
   
@@ -53,10 +53,10 @@ public class FinishState extends GameState {
     }
     
     Content.drawString(g, "rank", 48, 66);
-    if (rank == 1) Content.drawString(g, "speed demon", 20, 78);
-    else if (rank == 2) Content.drawString(g, "adventurer", 24, 78);
-    else if (rank == 3) Content.drawString(g, "beginner", 32, 78);
-    else if (rank == 4) Content.drawString(g, "bumbling idiot", 8, 78);
+    if (rank == 1) Content.drawString(g, "summa cumlaude", 8, 78);
+    else if (rank == 2) Content.drawString(g, "magna cumlaude", 8, 78);
+    else if (rank == 3) Content.drawString(g, "cumlaude", 32, 78);
+    else if (rank == 4) Content.drawString(g, "high merit", 24, 78);
     
     Content.drawString(g, "press enter", 20, 110);
     

@@ -68,9 +68,12 @@ public class PlayState extends GameState {
     player = new Player(tileMap);
     
     firstItem = true;
+    lastItem = false;
     updateItem = false;
     updateCredit = false;
     spring = true;
+    summer = false;
+    accel = false;
     populateBooks();
     populateItems();
     
@@ -88,17 +91,17 @@ public class PlayState extends GameState {
     // load music
     JukeBox.load("/Music/bgmusic_spring.mp3", "music_spring");
     System.out.println("1");
-		JukeBox.setVolume("music_spring", -10);
+    JukeBox.setVolume("music_spring", -10);
     System.out.println("2");
-		JukeBox.loop("music_spring", 1000, 1000, JukeBox.getFrames("music_spring") - 1000);
+    JukeBox.loop("music_spring", 1000, 1000, JukeBox.getFrames("music_spring") - 1000);
     System.out.println("3");
     JukeBox.load("/Music/bgmusic_summer.mp3", "music_summer");
     System.out.println("4");
-		JukeBox.setVolume("music_summer", -10);
+    JukeBox.setVolume("music_summer", -10);
     System.out.println("5");
-		JukeBox.load("/Music/bgmusic_finish.mp3", "finish");
+    JukeBox.load("/Music/bgmusic_finish.mp3", "finish");
     System.out.println("6");
-		JukeBox.setVolume("finish", -10);
+    JukeBox.setVolume("finish", -10);
 
     // load sfx
     System.out.println("7");
@@ -240,8 +243,8 @@ public class PlayState extends GameState {
     if ((s.equals("PROBSTAT") || s.equals("PAA")) && player.passedSemester2())
       return true;
     if ((s.equals("IMK") || s.equals("PBKK") || s.equals("TGO")) && player.passedSemester3()) {
-      player.setTotalCredit(player.getTotalCredit() + 3);
-      accel = true;
+      // player.setTotalCredit(player.getTotalCredit() + 3);
+      // accel = true;
       return true;
     }
     return false;
@@ -250,12 +253,12 @@ public class PlayState extends GameState {
   private boolean changeMusic() {
     if (summer && !JukeBox.isPlaying("music_summer")) {
       JukeBox.stop("music_spring");
-		  JukeBox.loop("music_summer", 1000, 1000, JukeBox.getFrames("music_summer") - 1000);
+      JukeBox.loop("music_summer", 1000, 1000, JukeBox.getFrames("music_summer") - 1000);
       return true;
     }
     if (spring && !JukeBox.isPlaying("music_spring")) {
       JukeBox.stop("music_summer");
-		  JukeBox.loop("music_spring", 1000, 1000, JukeBox.getFrames("music_spring") - 1000);
+      JukeBox.loop("music_spring", 1000, 1000, JukeBox.getFrames("music_spring") - 1000);
       return true;
     }
     return false;
@@ -284,17 +287,18 @@ public class PlayState extends GameState {
       hud.setCreditUnit(player.getTotalCredit());
       updateCredit = true;
     }
-    if (accel) {
-      hud.setCreditUnit(player.getTotalCredit());
-      accel = false;
-    }
+    // if (accel) {
+    //   hud.setCreditUnit(player.getTotalCredit());
+    //   accel = false;
+    // }
     
     // if (player.currentCredit() == player.getTotalCredit()) {
     //   eventFinish = blockInput = true;
     // }
-      if (player.finish()) {
-        eventFinish = blockInput = true;
-      }
+    System.out.println(player.finish());
+    if (player.finish()) {
+      eventFinish = blockInput = true;
+    }
     
     int oldX = xSector;
     int oldY = ySector;
@@ -339,10 +343,19 @@ public class PlayState extends GameState {
           hud.hasNotFinished(3);
           return;
         }
+
+        if (eligible(b.getCourseName()) && player.passedSemester3()) {
+          player.setTotalCredit(player.getTotalCredit() + 3);
+          hud.setCreditUnit(player.getTotalCredit());
+        }
         
         player.takeCourse(b.getCourseName());
         // if (b.getCourseName().equals("IMK")) 
         //   player.setTotalCredit(player.getTotalCredit() + 3);
+        // if ((b.getCourseName().equals("IMK") || b.getCourseName().equals("PBKK") || b.getCourseName().equals("TGO"))) {
+        //   player.setTotalCredit(player.getTotalCredit() + 3);
+        //   hud.setCreditUnit(player.getTotalCredit());
+        // }
         JukeBox.play("collect_book");
         hud.alreadyTaken(b.getCourseName());
         books.remove(i);
@@ -479,6 +492,20 @@ public class PlayState extends GameState {
         if (i == player.getCourseTaken().size() - 1 && player.getCourseTaken().size() < 24) break;
       }
     }
+    if (currentPage == 4 && player.getCourseTaken().size() > 24) {
+      int positionX = 16;
+      int positionY = 16;
+      String sks = new String();
+      for (int i = 24;  i < 28; i++) {
+        if (player.isTwoCredits(player.getCourseTaken().get(i))) sks = "2";
+        if (player.isThreeCredits(player.getCourseTaken().get(i))) sks = "3";
+        if (player.isFourCredits(player.getCourseTaken().get(i))) sks = "4";
+        Content.drawString(g, player.getCourseTaken().get(i), positionX, positionY);
+        Content.drawString(g, sks, 90, positionY);
+        positionY += 16;
+        if (i == player.getCourseTaken().size() - 1 && player.getCourseTaken().size() < 28) break;
+      }
+    }
 
     g.setColor(java.awt.Color.BLACK);
     for (int i = 0; i < boxes.size(); i++) {
@@ -494,7 +521,8 @@ public class PlayState extends GameState {
     }
     if (Keys.isPressed(Keys.F2)) {
       JukeBox.play("press_key");
-      if (player.getCourseTaken().size() > 18 && prevPage == 2) currentPage = 3;
+      if (player.getCourseTaken().size() > 24 && prevPage == 3) currentPage = 4;
+      else if (player.getCourseTaken().size() > 18 && prevPage == 2) currentPage = 3;
       else if (player.getCourseTaken().size() > 12 && prevPage == 1) currentPage = 2;
       else if (player.getCourseTaken().size() > 6 && prevPage == 0) currentPage = 1;
       else if (player.getCourseTaken().size() > 0 && prevPage == -1) currentPage = 0;
@@ -545,8 +573,8 @@ public class PlayState extends GameState {
         if (i % 2 == 0) boxes.add(new Rectangle(-128, i * 16, GamePanel.WIDTH, 16));
         else boxes.add(new Rectangle(128, i * 16, GamePanel.WIDTH, 16));
       }
-      if (JukeBox.isPlaying("music_spring")) JukeBox.stop("music_spring");
-      if (JukeBox.isPlaying("music_summer")) JukeBox.stop("music_summer");
+      JukeBox.stop("music_spring");
+      JukeBox.stop("music_summer");
       JukeBox.play("finish");
     }
     if (eventTick > 1) {
