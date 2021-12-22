@@ -180,7 +180,6 @@ public class PlayState extends GameState {
     insertBook("IMK", 40, 38);
     insertBook("TGO", 43, 16);
     insertBook("PBKK", 51, 8);
-
   }
 
   // function to create book objects
@@ -202,8 +201,6 @@ public class PlayState extends GameState {
       b.addChange(new int[]{47,3,6});
       b.addChange(new int[]{48,3,6});
     }
-    
-    
   }
   
   // function to set position of items
@@ -213,10 +210,9 @@ public class PlayState extends GameState {
 
     // condition for summer's key and autumn's key
     if (!firstItem) {
-      int x;
       item = new Item(tileMap);
       item.setType(Item.KEY);
-      x = player.finishedSemester4() ? 77 : 37;
+      int x = player.finishedSemester4() ? 77 : 37;
       item.setTilePosition(x, 35);
       items.add(item);
       updateItem = true;
@@ -247,6 +243,7 @@ public class PlayState extends GameState {
       items.add(item);
 
       firstItem = false;
+      
     }
     
   }
@@ -572,14 +569,14 @@ public class PlayState extends GameState {
     eventTick++;
     if (eventTick == 1) {
       boxes.clear();
-      for(int i = 0; i < 9; i++) {
+      for (int i = 0; i < 9; i++) {
         boxes.add(new Rectangle(0, i * 16, GamePanel.WIDTH, 16));
       }
     }
     if (eventTick > 1 && eventTick < 32) {
-      for(int i = 0; i < boxes.size(); i++) {
+      for (int i = 0; i < boxes.size(); i++) {
         Rectangle r = boxes.get(i);
-        if(i % 2 == 0) {
+        if (i % 2 == 0) {
           r.x -= 4;
         }
         else {
