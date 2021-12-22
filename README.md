@@ -14,18 +14,17 @@ VSCode dan Eclipse : Pembuatan Struktur Program
 > ![image](https://user-images.githubusercontent.com/85748069/147032255-0cafbbf5-25a9-4a03-98e9-8dc81513813d.png)
 > ![image](https://user-images.githubusercontent.com/85748069/147032294-41be6d6e-65c4-4a9c-89d5-140aa98e3021.png)
 
+## Struktur Folder
 
-## Folder Structure
+Workspace berisi dua folder secara default dimana:
 
-The workspace contains two folders by default, where:
+- `src`: folder untuk menyimpan program utama
+- `Resources`: folder untuk menyimpan aset
+- `Libs`: folder untuk menyimpan library tambahan untuk membaca file audio
+- 
+Sementara itu, file output yang dikompilasi akan dibuat di folder `bin` secara default.
 
-- `src`: the folder to maintain sources
-- `Resources`: the folder to maintain assets
-- `Libs`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+> Jika Anda ingin menyesuaikan struktur folder, buka `.vscode/settings.json` dan perbarui pengaturan terkait di sana.
 
 ## Dependency Management
 
