@@ -171,7 +171,7 @@ public abstract class Entity {
   public void update() {
     
     // get next position
-    if(moving) getNextPosition();
+    if (moving) getNextPosition();
     
     // check stop moving
     if(x == xDest && y == yDest) {

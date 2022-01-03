@@ -41,6 +41,7 @@ public class PauseState extends GameState {
     Content.drawString(g, "taken", 68, 116);
     
   }
+  
   public void handleInput() {
     if (Keys.isPressed(Keys.ESCAPE)) {
       JukeBox.play("press_key");

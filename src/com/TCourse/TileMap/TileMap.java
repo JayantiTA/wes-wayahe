@@ -111,16 +111,16 @@ public class TileMap {
       yMax = 0;
       
       String delims = "\\s+";
-      for(int row = 0; row < numRows; row++) {
+      for (int row = 0; row < numRows; row++) {
         String line = br.readLine();
         String[] tokens = line.split(delims);
-        for(int col = 0; col < numCols; col++) {
+        for (int col = 0; col < numCols; col++) {
           map[row][col] = Integer.parseInt(tokens[col]);
         }
       }
       
     }
-    catch(Exception e) {
+    catch (Exception e) {
       e.printStackTrace();
     }
     
@@ -234,4 +234,5 @@ public class TileMap {
     }
     
   }
+  
 }

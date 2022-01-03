@@ -34,7 +34,6 @@ public class PlayState extends GameState {
   // items
   private ArrayList<Item> items;
   
-
   // sparkles
   private ArrayList<Sparkle> sparkles;
   
