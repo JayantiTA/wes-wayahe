@@ -298,7 +298,7 @@ public class Player extends Entity {
         }
       }
       if (currentAnimation == DOWN) {
-        if (tileMap.getIndex(rowTile + 1, colTile) == 23) {;
+        if (tileMap.getIndex(rowTile + 1, colTile) == 23) {
           JukeBox.play("open_gate");
           tileMap.setTile(rowTile + 1, colTile, 1);
           hasKey = false;
